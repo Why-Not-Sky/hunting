@@ -1,0 +1,1 @@
+create table symbols (stock_id varchar(10), stock_name varchar(64), onstock_date date);
