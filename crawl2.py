@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-'''---------------------------------------------------------------------------------------------------------------------------------------
+
+"""---------------------------------------------------------------------------------------------------------------------------------------
 version  date    author     memo
 --------------------------------------------------------------------
 1.1     2016/07/26 	    產生crawl2，整理輸入輸出，提供批次
@@ -31,7 +32,7 @@ feature list:
     * crawling only if the trade market open
     * calculate moving average
     * implement technical analysis library
----------------------------------------------------------------------------------------------------------------------------------------'''
+---------------------------------------------------------------------------------------------------------------------------------------"""
 
 import argparse
 import csv
@@ -43,14 +44,15 @@ import time
 from datetime import datetime, timedelta
 from os import mkdir
 from os.path import isdir
-#from urllib import urlopen
+
 from urllib.request import urlopen
 import itertools
 import json
 import datetime
 
 import requests
-from lxml import html
+import lxml
+#from lxml import html
 
 def str_date_to_int(date_str='20160712', esc_char='/'):
     date_str = date_str.replace(esc_char, '')
@@ -173,7 +175,7 @@ class Crawler():
         data = infile.read()
 
         # Parse page
-        tree = html.fromstring(data)
+        tree = lxml.html.fromstring(data)
 
         '''for python3 2016/07/19'''
         f = open(self._get_tse_file_name(self.prefix, taiwan_date_str), 'w')  # 'ab')
