@@ -41,66 +41,21 @@ import os
 import re
 import string
 import time
-from datetime import datetime, timedelta
+#import datetime
+from datetime import date, timedelta
 from os import mkdir
 from os.path import isdir
 
 from urllib.request import urlopen
-import itertools
+from lxml import html
 import json
-import datetime
 
-import requests
-import lxml
-#from lxml import html
+import petl as etl
+import psycopg2
 
-def str_date_to_int(date_str='20160712', esc_char='/'):
-    date_str = date_str.replace(esc_char, '')
-    year = int(date_str[:4])
-    month = int(date_str[4:6])
-    day = int(date_str[6:])
-    return year, month, day
 
-def str_to_date(date_str='20160712', esc_char=''):
-    year, month, day = str_date_to_int(date_str, esc_char)
-    return datetime.date(year, month, day)
 
-def to_taiwan_date_str(date_str='20160712', esc_char='/'):
-    year, month, day = str_date_to_int(date_str, esc_char)
-    taiwan_date = '{0}{esc_ch}{1:02d}{esc_ch}{2:02d}'.format(year - 1911, month, day, esc_ch=esc_char)
-    return taiwan_date
-
-def to_century_date_str(self, taiwan_date='105/07/12', esc_char='/'):
-    '''in:105/07/12, /  --> 2106/07/12
-       in:1050712  --> 20160712
-    '''
-    taiwan_date = taiwan_date.replace(esc_char, '')
-    year = int(taiwan_date[:3]) + 1911
-    month = int(taiwan_date[3:5])
-    day = int(taiwan_date[5:])
-    century_date = '{0}{esc_ch}{1:02d}{esc_ch}{2:02d}'.format(year, month, day, esc_ch=esc_char)
-    return century_date
-
-def date_range(start_date, end_date):
-    """ date_range(20160701, 20160712) """
-    # 若是字串則自動轉換為日期
-    start_date = str_to_date(start_date) if isinstance(start_date, str) else start_date
-    end_date = str_to_date(end_date)  if isinstance(end_date, str) else end_date
-
-    dlist = (start_date + datetime.timedelta(n) for n in range((end_date - start_date).days))
-    return dlist
-
-def download_data_by_url(url, fname):
-    # response = urlopen(url)
-    # data = response.read()
-    r = requests.get(url)
-    data = r.content
-
-    # need to use binary to get the data
-    # 原先的作法直接從request.response回來，需以binary的方式寫入
-    with open(fname, 'wb') as fd:
-        fd.write(data)
-        fd.close()
+import date_util as util
 
 class Crawler():
     def __init__(self, prefix="data", origin = "origin"):
@@ -137,9 +92,8 @@ class Crawler():
             '''for python3 2016/07/19'''
             # filter() in python 3 does not return a list, but a iterable filter object. Call next() on it to get the first filtered item:
             row[index] = ''.join(list(filter(lambda x: x in string.printable, row[index])))
-            #rdict[self.fields[index]] = row[index]
 
-        return row #','.join(row)   #rdict #(zip(self.fields, row))   #row
+        return row
 
     def _get_url_of_tse_century(self, date_str):
         url = 'http://www.twse.com.tw/ch/trading/exchange/MI_INDEX/MI_INDEX3_print.php?'
@@ -153,29 +107,29 @@ class Crawler():
     def _get_url_of_tse(self, taiwan_date_str):
         return (self.url_tse.format(taiwan_date_str))
 
-    def _get_tse_file_name(self, path='', taiwan_date_str='107/07/12.csv'):
+    def _get_tse_file_name(self, path='', taiwan_date_str='107/07/12'):
         return  '{}/{}_T.csv'.format(path, taiwan_date_str.replace('/', ''))
 
     def _get_tse_data_raw(self, taiwan_date_str):
         url = self.url_tse.format(taiwan_date_str)
         fname = self._get_tse_file_name(self.origin, taiwan_date_str)
-        download_data_by_url(url, fname)
+        util.download_data_by_url(url, fname)
 
     ''' get the csv directly'''
     def _get_tse_data_raw_simple(self, date_str='20170712'):
         url = self._get_url_of_tse_century(date_str)
         fname = '{}/{}_T.csv'.format(self.origin, date_str)
-        download_data_by_url(url, fname)
+        util.download_data_by_url(url, fname)
 
     def _transform_tse_data(self, taiwan_date_str):
         # Get html page and parse as tree
-        date_str = to_century_date_str(taiwan_date_str).replace('/', '')
+        date_str = util.to_century_date_str(taiwan_date_str).replace('/', '')
         infname = self._get_tse_file_name(self.origin, taiwan_date_str)
         infile = open(infname, 'rb')  # 'ab')
         data = infile.read()
 
         # Parse page
-        tree = lxml.html.fromstring(data)
+        tree = html.fromstring(data)
 
         '''for python3 2016/07/19'''
         f = open(self._get_tse_file_name(self.prefix, taiwan_date_str), 'w')  # 'ab')
@@ -217,12 +171,12 @@ class Crawler():
 
         fname = self._get_otc_file_name(self.origin, taiwan_date_str)
 
-        download_data_by_url(url, fname)
+        util.download_data_by_url(url, fname)
         return fname
 
     def _transform_otc_data(self, taiwan_date_str):
         # Get html page and parse as tree
-        date_str = to_century_date_str(taiwan_date_str).replace('/', '')
+        date_str = util.to_century_date_str(taiwan_date_str).replace('/', '')
         infname = self._get_otc_file_name(self.origin, taiwan_date_str)
         infile = open(infname, 'r')  # 'ab')
         data = infile.read()
@@ -258,7 +212,7 @@ class Crawler():
         f.close()
 
     def get_data_all_by_date(self, date_str='20160712'):
-        taiwan_date_str = to_taiwan_date_str(date_str, '/')
+        taiwan_date_str = util.to_taiwan_date_str(date_str, '/')
         #print('Crawling {} by simple format'.format(date_str))
         # to-do: refactoring to general extract method
         #self._get_twse_data_raw_simple(date_str)
@@ -280,8 +234,8 @@ class Crawler():
         max_error = 5
         error_times = 0
         # back to download
-        from_day = str_to_date(start_date )
-        to_day = str_to_date(end_date)
+        from_day = util.str_to_date(start_date)
+        to_day = util.str_to_date(end_date)
 
         while error_times < max_error and from_day <= to_day:
             date_str = from_day.strftime('%Y%m%d')
@@ -295,11 +249,6 @@ class Crawler():
                 continue
             finally:
                 from_day += timedelta(1)
-
-    def _get_during(self):
-        start_date = '20160701'
-        end_date = '20160731'
-        return start_date, end_date
 
     def _write_execution_log(self):
         pass
@@ -331,7 +280,7 @@ def main():
 
     # Day only accept 0 or 3 arguments
     if len(args.day) == 0:
-        from_day = datetime.date.today().strftime('%Y%m%d')
+        from_day = date.today().strftime('%Y%m%d')
     elif len(args.day) >= 1:
         from_day = str(args.day[0])
     else:
