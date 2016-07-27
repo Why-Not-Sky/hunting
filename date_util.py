@@ -23,6 +23,12 @@ import time
 from datetime import date, timedelta
 import requests
 
+def date_str_add(date_str, delta=1):
+    d = str_to_date(date_str)
+    nd = d + timedelta(delta)
+    return nd.strftime('%Y%m%d')
+    pass
+
 def str_date_to_int(date_str='20160712', esc_char='/'):
     date_str = date_str.replace(esc_char, '')
     year = int(date_str[:4])
@@ -56,7 +62,7 @@ def date_range(start_date, end_date):
     start_date = str_to_date(start_date) if isinstance(start_date, str) else start_date
     end_date = str_to_date(end_date)  if isinstance(end_date, str) else end_date
 
-    dlist = (start_date + datetime.timedelta(n) for n in range((end_date - start_date).days))
+    dlist = (start_date + timedelta(n) for n in range((end_date - start_date).days))
     return dlist
 
 def download_data_by_url(url, fname):
@@ -72,7 +78,11 @@ def download_data_by_url(url, fname):
         fd.close()
 
 def main():
-    pass
+    dlist = date_range('20160725', '20160727')
+
+    for d in dlist:
+        date_str = d.strftime('%Y%m%d')
+        print('Crawling {} '.format(date_str))
 
 
 if __name__ == '__main__':

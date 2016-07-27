@@ -3,6 +3,8 @@
 log/
 data/
 origin/
+extract/
+transform/
 
 # 這是註解
 [Oo]bj

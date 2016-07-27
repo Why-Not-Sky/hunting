@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6a49d9f-4f98-49ec-b72d-a866d29226c3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/date_util.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/crawl3.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/crawler.cfg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/extract/1050701_T.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/transform/1050701_T.csv" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/etl.py" afterPath="$PROJECT_DIR$/web_crawler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawl2.py" afterPath="$PROJECT_DIR$/crawl2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etl.py" afterPath="$PROJECT_DIR$/etl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/date_util.py" afterPath="$PROJECT_DIR$/date_util.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/crawl-error.log" afterPath="$PROJECT_DIR$/log/crawl-error.log" />
     </list>
     <ignored path="hunting.iws" />
@@ -12629,11 +12632,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="crawl.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawl.py">
+      <file leaf-file-name="crawl3.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/crawl3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="21" />
+            <state relative-caret-position="150">
+              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+              <folding>
+                <element signature="e#1640#1655#0" expanded="true" />
+                <element signature="e#2731#3358#0" expanded="false" />
+                <element signature="e#3440#3928#0" expanded="false" />
+                <element signature="e#3957#4226#0" expanded="false" />
+                <element signature="e#4250#4591#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -12642,11 +12661,41 @@
       <file leaf-file-name="crawl2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawl2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="109" column="68" selection-start-line="109" selection-start-column="68" selection-end-line="109" selection-end-column="68" />
+            <state relative-caret-position="842">
+              <caret line="184" column="21" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="21" />
               <folding>
                 <element signature="e#25#1418#1" expanded="false" />
                 <element signature="e#1420#1435#0" expanded="true" />
+                <element signature="e#6472#6704#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crawler.cfg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/crawler.cfg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web_crawler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web_crawler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="569">
+              <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+              <folding>
+                <element signature="e#917#930#0" expanded="true" />
+                <element signature="e#1335#1624#0" expanded="false" />
+                <element signature="e#1687#1945#0" expanded="false" />
+                <element signature="e#2041#2133#0" expanded="false" />
+                <element signature="e#2174#2520#0" expanded="false" />
+                <element signature="e#2839#3088#0" expanded="false" />
+                <element signature="e#3145#3420#0" expanded="false" />
+                <element signature="e#4279#4837#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -12655,33 +12704,14 @@
       <file leaf-file-name="date_util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/date_util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+            <state relative-caret-position="795">
+              <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
               <folding>
-                <element signature="e#1350#1530#0" expanded="false" />
-                <element signature="e#1606#1957#0" expanded="false" />
-                <element signature="e#2001#2339#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="etl.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/etl.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-              <folding>
-                <element signature="e#917#957#0" expanded="true" />
-                <element signature="e#1295#1584#0" expanded="false" />
-                <element signature="e#1647#1905#0" expanded="false" />
-                <element signature="e#2001#2093#0" expanded="false" />
-                <element signature="e#2134#2480#0" expanded="false" />
-                <element signature="e#2544#2665#0" expanded="false" />
-                <element signature="e#2714#2718#0" expanded="false" />
-                <element signature="e#3030#3305#0" expanded="false" />
-                <element signature="e#3395#3516#0" expanded="false" />
-                <element signature="e#4182#4950#0" expanded="false" />
+                <element signature="e#964#1061#0" expanded="false" />
+                <element signature="e#1123#1280#0" expanded="false" />
+                <element signature="e#1490#1670#0" expanded="false" />
+                <element signature="e#1746#2097#0" expanded="false" />
+                <element signature="e#2514#2780#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -12702,9 +12732,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/date_util.py" />
-        <option value="$PROJECT_DIR$/crawl2.py" />
         <option value="$PROJECT_DIR$/etl.py" />
+        <option value="$PROJECT_DIR$/crawl2.py" />
+        <option value="$PROJECT_DIR$/crawler.cfg" />
+        <option value="$PROJECT_DIR$/date_util.py" />
+        <option value="$PROJECT_DIR$/web_crawler.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/crawl3.py" />
       </list>
     </option>
   </component>
@@ -12739,8 +12773,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -12762,9 +12794,15 @@
               <option name="myItemId" value="hunting" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -12779,7 +12817,12 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.etl">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.crawl3">
     <configuration default="false" name="crawl2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -12793,23 +12836,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="hunting" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/crawl2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="etl" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/python3.5/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="hunting" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/etl.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -12948,14 +12974,66 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python.crawl2" />
-      <item index="1" class="java.lang.String" itemvalue="Python.etl" />
+    <configuration default="false" name="date_util" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/date_util.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="crawl3" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/crawl3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="crawler" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/python3.5/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web_crawler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Python.date_util" />
+      <item index="1" class="java.lang.String" itemvalue="Python.crawl3" />
+      <item index="2" class="java.lang.String" itemvalue="Python.crawler" />
+      <item index="3" class="java.lang.String" itemvalue="Python.crawl2" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.etl" />
-        <item index="1" class="java.lang.String" itemvalue="Python.crawl2" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.crawl2" />
       </list>
     </recent_temporary>
   </component>
@@ -12974,25 +13052,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="89" y="81" width="1346" height="722" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18945022" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18945022" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19457735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39872408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19457735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39872408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -13002,9 +13080,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/etl.py</url>
-          <line>161</line>
+          <url>file://$PROJECT_DIR$/web_crawler.py</url>
+          <line>192</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/crawl3.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/date_util.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -13017,11 +13105,64 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/crawl3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1640#1655#0" expanded="true" />
+            <element signature="e#2731#3358#0" expanded="false" />
+            <element signature="e#3440#3928#0" expanded="false" />
+            <element signature="e#3957#4226#0" expanded="false" />
+            <element signature="e#4250#4591#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawler.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1350">
+          <caret line="179" column="21" selection-start-line="178" selection-start-column="3" selection-end-line="179" selection-end-column="21" />
+          <folding>
+            <element signature="e#917#930#0" expanded="true" />
+            <element signature="e#1335#1624#0" expanded="false" />
+            <element signature="e#1687#1945#0" expanded="false" />
+            <element signature="e#2041#2133#0" expanded="false" />
+            <element signature="e#2174#2520#0" expanded="false" />
+            <element signature="e#2839#3088#0" expanded="false" />
+            <element signature="e#3145#3420#0" expanded="false" />
+            <element signature="e#4279#4837#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/date_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
+          <folding>
+            <element signature="e#964#1061#0" expanded="false" />
+            <element signature="e#1123#1280#0" expanded="false" />
+            <element signature="e#1490#1670#0" expanded="false" />
+            <element signature="e#1746#2097#0" expanded="false" />
+            <element signature="e#2514#2780#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/crawl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -13037,6 +13178,8 @@
           <folding>
             <element signature="e#25#1418#1" expanded="false" />
             <element signature="e#1420#1435#0" expanded="true" />
+            <element signature="e#4989#6156#0" expanded="false" />
+            <element signature="e#6472#6704#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13046,28 +13189,28 @@
         <state relative-caret-position="345">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#1350#1530#0" expanded="false" />
-            <element signature="e#1606#1957#0" expanded="false" />
-            <element signature="e#2001#2339#0" expanded="false" />
+            <element signature="e#964#1061#0" expanded="false" />
+            <element signature="e#1123#1280#0" expanded="false" />
+            <element signature="e#1490#1670#0" expanded="false" />
+            <element signature="e#1746#2097#0" expanded="false" />
+            <element signature="e#2514#2780#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etl.py">
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#917#957#0" expanded="true" />
-            <element signature="e#1295#1584#0" expanded="false" />
-            <element signature="e#1647#1905#0" expanded="false" />
-            <element signature="e#2001#2093#0" expanded="false" />
-            <element signature="e#2134#2480#0" expanded="false" />
-            <element signature="e#2544#2665#0" expanded="false" />
-            <element signature="e#2714#2718#0" expanded="false" />
-            <element signature="e#3030#3305#0" expanded="false" />
-            <element signature="e#3395#3516#0" expanded="false" />
-            <element signature="e#4182#4950#0" expanded="false" />
+            <element signature="e#917#930#0" expanded="true" />
+            <element signature="e#1335#1624#0" expanded="false" />
+            <element signature="e#1687#1945#0" expanded="false" />
+            <element signature="e#2041#2133#0" expanded="false" />
+            <element signature="e#2174#2520#0" expanded="false" />
+            <element signature="e#2839#3088#0" expanded="false" />
+            <element signature="e#3145#3420#0" expanded="false" />
+            <element signature="e#4279#4837#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13087,6 +13230,8 @@
           <folding>
             <element signature="e#25#1418#1" expanded="false" />
             <element signature="e#1420#1435#0" expanded="true" />
+            <element signature="e#4989#6156#0" expanded="false" />
+            <element signature="e#6472#6704#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13096,28 +13241,80 @@
         <state relative-caret-position="345">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#1350#1530#0" expanded="false" />
-            <element signature="e#1606#1957#0" expanded="false" />
-            <element signature="e#2001#2339#0" expanded="false" />
+            <element signature="e#964#1061#0" expanded="false" />
+            <element signature="e#1123#1280#0" expanded="false" />
+            <element signature="e#1490#1670#0" expanded="false" />
+            <element signature="e#1746#2097#0" expanded="false" />
+            <element signature="e#2514#2780#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etl.py">
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#917#957#0" expanded="true" />
-            <element signature="e#1295#1584#0" expanded="false" />
-            <element signature="e#1647#1905#0" expanded="false" />
-            <element signature="e#2001#2093#0" expanded="false" />
-            <element signature="e#2134#2480#0" expanded="false" />
-            <element signature="e#2544#2665#0" expanded="false" />
-            <element signature="e#2714#2718#0" expanded="false" />
-            <element signature="e#3030#3305#0" expanded="false" />
-            <element signature="e#3395#3516#0" expanded="false" />
-            <element signature="e#4182#4950#0" expanded="false" />
+            <element signature="e#917#930#0" expanded="true" />
+            <element signature="e#1335#1624#0" expanded="false" />
+            <element signature="e#1687#1945#0" expanded="false" />
+            <element signature="e#2041#2133#0" expanded="false" />
+            <element signature="e#2174#2520#0" expanded="false" />
+            <element signature="e#2839#3088#0" expanded="false" />
+            <element signature="e#3145#3420#0" expanded="false" />
+            <element signature="e#4279#4837#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawl2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="109" column="68" selection-start-line="109" selection-start-column="68" selection-end-line="109" selection-end-column="68" />
+          <folding>
+            <element signature="e#25#1418#1" expanded="false" />
+            <element signature="e#1420#1435#0" expanded="true" />
+            <element signature="e#4989#6156#0" expanded="false" />
+            <element signature="e#6472#6704#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/date_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding>
+            <element signature="e#964#1061#0" expanded="false" />
+            <element signature="e#1123#1280#0" expanded="false" />
+            <element signature="e#1490#1670#0" expanded="false" />
+            <element signature="e#1746#2097#0" expanded="false" />
+            <element signature="e#2514#2780#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#917#930#0" expanded="true" />
+            <element signature="e#1335#1624#0" expanded="false" />
+            <element signature="e#1687#1945#0" expanded="false" />
+            <element signature="e#2041#2133#0" expanded="false" />
+            <element signature="e#2174#2520#0" expanded="false" />
+            <element signature="e#2839#3088#0" expanded="false" />
+            <element signature="e#3145#3420#0" expanded="false" />
+            <element signature="e#4279#4837#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13129,29 +13326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crawl2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="109" column="68" selection-start-line="109" selection-start-column="68" selection-end-line="109" selection-end-column="68" />
-          <folding>
-            <element signature="e#25#1418#1" expanded="false" />
-            <element signature="e#1420#1435#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-          <folding>
-            <element signature="e#1350#1530#0" expanded="false" />
-            <element signature="e#1606#1957#0" expanded="false" />
-            <element signature="e#2001#2339#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/crawl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -13160,21 +13334,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etl.py">
+    <entry file="file://$PROJECT_DIR$/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+        <state relative-caret-position="795">
+          <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
           <folding>
-            <element signature="e#917#957#0" expanded="true" />
-            <element signature="e#1295#1584#0" expanded="false" />
-            <element signature="e#1647#1905#0" expanded="false" />
-            <element signature="e#2001#2093#0" expanded="false" />
-            <element signature="e#2134#2480#0" expanded="false" />
-            <element signature="e#2544#2665#0" expanded="false" />
-            <element signature="e#2714#2718#0" expanded="false" />
-            <element signature="e#3030#3305#0" expanded="false" />
-            <element signature="e#3395#3516#0" expanded="false" />
-            <element signature="e#4182#4950#0" expanded="false" />
+            <element signature="e#964#1061#0" expanded="false" />
+            <element signature="e#1123#1280#0" expanded="false" />
+            <element signature="e#1490#1670#0" expanded="false" />
+            <element signature="e#1746#2097#0" expanded="false" />
+            <element signature="e#2514#2780#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawl2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="184" column="21" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="21" />
+          <folding>
+            <element signature="e#25#1418#1" expanded="false" />
+            <element signature="e#1420#1435#0" expanded="true" />
+            <element signature="e#6472#6704#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawler.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+          <folding>
+            <element signature="e#917#930#0" expanded="true" />
+            <element signature="e#1335#1624#0" expanded="false" />
+            <element signature="e#1687#1945#0" expanded="false" />
+            <element signature="e#2041#2133#0" expanded="false" />
+            <element signature="e#2174#2520#0" expanded="false" />
+            <element signature="e#2839#3088#0" expanded="false" />
+            <element signature="e#3145#3420#0" expanded="false" />
+            <element signature="e#4279#4837#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawl3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding>
+            <element signature="e#1640#1655#0" expanded="true" />
+            <element signature="e#2731#3358#0" expanded="false" />
+            <element signature="e#3440#3928#0" expanded="false" />
+            <element signature="e#3957#4226#0" expanded="false" />
+            <element signature="e#4250#4591#0" expanded="false" />
           </folding>
         </state>
       </provider>
