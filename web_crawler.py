@@ -2,7 +2,9 @@
 '''---------------------------------------------------------------------------------------------------------------------------------------
 version  date    author     memo
 ------------------------------------------------------------------------------------------------------------------------------------------
-0.1     2016/07/26  sky     Scrap the stock data from web and etl to database
+0.1     2016/07/26  sky     refactoring from crawl2.py
+1.1d    2016/07/27          use etl library and load into database
+                            issue: can't identify the load operation between tse and otc
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,21 +27,34 @@ import csv
 import time
 import json
 import logging
-
-from datetime import datetime, timedelta
 from os import mkdir
 from os.path import isdir
-from lxml import html
 
+# external 3-party package
+from datetime import datetime, timedelta
+from lxml import html
+import petl as etl
+import psycopg2
+
+# file in the project
 import date_util as util
+import db_util as db
 
 class data_object():
     def  __init__(self, dtype, url):
         self.type=dtype
         self.url=url
 
+# set up a CSV file to demonstrate with
+_CONNECTION = 'dbname=stock user=stock password=stock'
+_EXTRACT_PATH = './extract'
+_DATA_PATH = './transform'
+_HEADER_LINE = 'symbol_id,trade_date,volume,amount,open,high,low,close,change,trans'
+_HEADER = _HEADER_LINE.split(',')
+_CONVERT_ZERO = ['', '--', '---', 'x', 'X', 'null', 'NULL']   # convert illegal value into 0
+
 class WebCrawler():
-    def __init__(self, prefix="transform", origin = "extract"):
+    def __init__(self, prefix=_DATA_PATH, origin = _EXTRACT_PATH):
         ''' Make directory if not exist when initialize '''
         if not isdir(prefix): mkdir(prefix)
         self.prefix = prefix
@@ -49,7 +64,7 @@ class WebCrawler():
 
         self.url = ''
         self.postfix = ''
-        #self._set_trade_date('20160701')
+        self._connection = None
 
     def set_trade_date(self, trade_date='20160701'):
         self._trade_date = trade_date
@@ -58,15 +73,23 @@ class WebCrawler():
         self.source_file = self._get_file_name(self.prefix, 'csv')
         self.dest_db = ''
 
+    def _get_connection(self):
+        self._connection = self._connection if (self._connection is not None) else psycopg2.connect(_CONNECTION)
+        return self._connection
+
     # get the file in the path
     def _get_file_name(self, path='', appendix='txt'):
         return '{}/{}{}.{}'.format(path, self._taiwan_date.replace('/', ''), self.postfix, appendix)
 
     def _clean_row(self, row):
+        #f_clean = lambda x: '0' if (x in _CONVERT_ZERO) else x
+
         for index, content in enumerate(row):
-            row[index] = re.sub(",", "", content.strip())
+            col = re.sub(",", "", content.strip())
             # filter() in python 3 does not return a list, but a iterable filter object. Call next() on it to get the first filtered item:
-            row[index] = ''.join(list(filter(lambda x: x in string.printable, row[index])))
+            col = ''.join(list(filter(lambda x: x in string.printable, col)))
+            # transform non-decimal number into decimal
+            row[index] = '0' if (col in _CONVERT_ZERO) else col
 
         return row
 
@@ -98,8 +121,25 @@ class WebCrawler():
 
         dest_file.close()
 
-    def load(self, taiwan_date_str=None):
+    def clean_db(self, trade_date='19000101'):
+        db.execute_sql(connection=self._get_connection(), sql="delete from quotes where trade_date = '{}' ".format(trade_date))
+
+    def _load_db(self, taiwan_date_str=None, is_delete=False):
         if not (taiwan_date_str is None): self.set_trade_date(taiwan_date_str)
+        raw_file = self.source_file
+        tse = etl.fromcsv(raw_file)
+
+        connection = self._get_connection() #psycopg2.connect(_CONNECTION)
+        if is_delete: self.clean_db(self._trade_date)
+
+        # assuming table "quotes" already exists in the database, and tse need to have the header.
+        # petl.io.db.todb(table, dbo, tablename, schema=None, commit=True, create=False, drop=False, constraints=True,
+        #                metadata=None, dialect=None, sample=1000)[source]
+        etl.todb(tse, connection, 'quotes', drop=False) #, truncate=False)
+
+    def load(self, taiwan_date_str=None, is_delete=False):
+        if not (taiwan_date_str is None): self.set_trade_date(taiwan_date_str)
+        self._load_db(is_delete=is_delete)
         pass
 
     def run(self, date_str):
@@ -110,7 +150,7 @@ class WebCrawler():
         self.load()
 
 class tseWebCrawler(WebCrawler):
-    def __init__(self, prefix="transform", origin = "extract"):
+    def __init__(self, prefix=_DATA_PATH, origin = _EXTRACT_PATH):
         super(tseWebCrawler, self).__init__(prefix, origin)
         self.postfix = '_T'
         self.url = "http://www.twse.com.tw/ch/trading/exchange/MI_INDEX/MI_INDEX.php?download=&qdate={}&selectType=ALL"
@@ -118,6 +158,8 @@ class tseWebCrawler(WebCrawler):
     def _clean(self, data, dest_file):
         date_str = self._trade_date
         cw = csv.writer(dest_file, lineterminator='\n')
+        #add header for etl
+        cw.writerow(_HEADER)
 
         # Parse page
         tree = html.fromstring(data)
@@ -144,7 +186,7 @@ class tseWebCrawler(WebCrawler):
             cw.writerow(row)
 
 class otcWebCrawler(WebCrawler):
-    def __init__(self, prefix="transform", origin = "extract"):
+    def __init__(self, prefix=_DATA_PATH, origin = _EXTRACT_PATH):
         super(otcWebCrawler, self).__init__(prefix, origin)
         self.postfix = '_O'
         self.url = 'http://www.tpex.org.tw/web/stock/aftertrading/daily_close_quotes/stk_quote_result.php?l=zh-tw&d={}&_={}'
@@ -152,6 +194,7 @@ class otcWebCrawler(WebCrawler):
     def _clean(self, data, dest_file):
         date_str = self._trade_date
         cw = csv.writer(dest_file, lineterminator='\n')
+        cw.writerow(_HEADER)
 
         result = json.loads(data)  # data.json()
 
@@ -181,17 +224,62 @@ def test_tse(start_date):
 
 def test_tse_extract(start_date):
     t = tseWebCrawler()
-    t.transform(start_date)
+    t.extract(start_date)
 
 def test_tse_transform(start_date):
     t = tseWebCrawler()
     #t.set_trade_date(start_date)
     t.transform(start_date)
 
+def test_tse_load(start_date):
+    t = tseWebCrawler()
+    t.load(start_date, is_delete=True)
+
+def test_otc_load(start_date):
+    t = otcWebCrawler()
+    t.load(start_date)
+
+def test_otc_transform(start_date):
+    t = otcWebCrawler()
+    #t.set_trade_date(start_date)
+    t.transform(start_date)
+
+def test_otc(start_date):
+    t = otcWebCrawler()
+    t.run(start_date)
+
+def test_get_all(start_date):
+    t = tseWebCrawler()
+    t.clean_db(start_date)
+
+    t.run(start_date)
+
+    o = otcWebCrawler()
+    o.run(start_date)
+
 def main():
-    #test_tse_extract('20160701')
-    #test_tse_transform('20160701')
-    test_tse('20160701')
+    start_date = '20160701'
+
+    t = time.process_time()
+    # do some stuff
+
+    start = time.time()
+    print ('start crawling at {}...'.format(start))
+
+    #test_get_all(start_date)
+    #test_tse_extract(start_date)
+    #test_tse_transform(start_date)
+    test_tse_load(start_date)
+    #test_tse(start_date)
+    #test_otc_transform(start_date)
+    test_otc_load(start_date)
+    #test_otc(start_date)
+
+    end = time.time()
+    print('end crawling total: {}...'.format(end - start))
+
+    elapsed_time = time.process_time() - t
+    print('elapsed_time: {}...'.format(elapsed_time))
 
 if __name__ == '__main__':
     main()

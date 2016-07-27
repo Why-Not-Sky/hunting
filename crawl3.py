@@ -12,7 +12,7 @@ version  date    author     memo
 ------------------------------------------------------------------------------------------------------------------------------------------
 non-function requirement:
     * add unit test
-    * implement by etl library: pets, odo, or tab…
+    * implement by etl library: pets, odo, or tab…(@2016/07/27)
     * add exception handling: by AOP framework
     * refactor by inheritance (@2016/07/27)
     * refactor by IoC
