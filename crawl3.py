@@ -48,6 +48,8 @@ from datetime import date, timedelta
 import date_util as util
 import web_crawler as crawler
 
+_CONFIG_FILE = 'crawler.cfg'
+
 class Crawler():
     def __init__(self, prefix="data", origin = "origin"):
         pass
@@ -69,6 +71,7 @@ class Crawler():
             try:
                 tse.run(date_str)
                 otc.run(date_str)
+                self._write_execution_log(date_str)
                 error_times = 0
             except:
                 logging.error('Crawl raise error {}'.format(date_str))
@@ -96,7 +99,9 @@ class Crawler():
             finally:
                 from_day += timedelta(1)
 
-    def _write_execution_log(self):
+    def _write_execution_log(self, date_str):
+        #todo: update the config
+        update_last_run(date_str)
         pass
 
 def get_from_arguments():
@@ -114,12 +119,19 @@ def get_from_arguments():
 
     return from_day, to_day
 
+def update_last_run(last_date):
+    config = configparser.RawConfigParser()
+    cfgfile = open(_CONFIG_FILE, 'w')
+
+    config.add_section('TaiwanStcok')
+    config.set('TaiwanStcok', 'last_date', last_date)
+    config.write(cfgfile)
+    cfgfile.close()
+
 def get_from_config():
     config = configparser.RawConfigParser()
-
-    secrets = 'crawler.cfg'
-
-    config.read(secrets)
+    cfgfile = _CONFIG_FILE
+    config.read(cfgfile)
 
     last_date = config.get("TaiwanStcok", "last_date")
     from_day = util.date_str_add(last_date)
