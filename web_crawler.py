@@ -20,25 +20,22 @@ feature list:
     * 
 
 ---------------------------------------------------------------------------------------------------------------------------------------'''
-import string
-import os
-import re
 import csv
-import time
 import json
 import logging
+import re
+import string
+import time
 from os import mkdir
 from os.path import isdir
 
-# external 3-party package
-from datetime import datetime, timedelta
-from lxml import html
 import petl as etl
 import psycopg2
+from lxml import html
 
-# file in the project
-import date_util as util
-import db_util as db
+import utility.db_util as db
+from utility import date_util as util
+
 
 class data_object():
     def  __init__(self, dtype, url):

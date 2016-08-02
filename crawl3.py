@@ -37,16 +37,13 @@ feature list:
 ---------------------------------------------------------------------------------------------------------------------------------------"""
 
 import argparse
+import configparser
 import logging
 import os
-
-import configparser
-
-#import datetime
 from datetime import date, timedelta
 
-import date_util as util
 import web_crawler as crawler
+from utility import date_util as util
 
 _CONFIG_FILE = 'crawler.cfg'
 

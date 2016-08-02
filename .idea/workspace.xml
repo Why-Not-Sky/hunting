@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6a49d9f-4f98-49ec-b72d-a866d29226c3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/select" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utility/web_util.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/date_util.py" afterPath="$PROJECT_DIR$/utility/date_util.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/db_util.py" afterPath="$PROJECT_DIR$/utility/db_util.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawl2.py" afterPath="$PROJECT_DIR$/crawl2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawl3.py" afterPath="$PROJECT_DIR$/crawl3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crawler.cfg" afterPath="$PROJECT_DIR$/crawler.cfg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/crawl-error.log" afterPath="$PROJECT_DIR$/log/crawl-error.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web_crawler.py" afterPath="$PROJECT_DIR$/web_crawler.py" />
     </list>
     <ignored path="hunting.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,7 +23,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -12628,52 +12633,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="crawl3.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="crawl3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawl3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+            <state relative-caret-position="304">
+              <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
               <folding>
                 <element signature="e#1653#1668#0" expanded="true" />
-                <element signature="e#2826#3453#0" expanded="false" />
-                <element signature="e#3612#4100#0" expanded="false" />
-                <element signature="e#4673#5014#0" expanded="false" />
+                <element signature="e#2820#3447#0" expanded="false" />
+                <element signature="e#3606#4094#0" expanded="false" />
+                <element signature="e#4667#5008#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crawler.cfg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawler.cfg">
+      <file leaf-file-name="webTableCrawler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="date_util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/date_util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
+            <state relative-caret-position="-329">
+              <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
               <folding>
-                <element signature="e#964#1061#0" expanded="false" />
-                <element signature="e#1123#1280#0" expanded="false" />
-                <element signature="e#1490#1670#0" expanded="false" />
-                <element signature="e#1746#2097#0" expanded="false" />
-                <element signature="e#2514#2780#0" expanded="false" />
+                <element signature="e#1136#1150#0" expanded="true" />
+                <element signature="e#2143#2152#0" expanded="false" />
+                <element signature="e#2208#2501#0" expanded="false" />
+                <element signature="e#2551#3051#0" expanded="false" />
+                <element signature="e#3097#3982#0" expanded="false" />
+                <element signature="e#4312#4724#0" expanded="false" />
+                <element signature="e#4746#5323#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stockCrawler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+              <folding>
+                <element signature="e#835#844#0" expanded="true" />
+                <element signature="e#1396#2234#0" expanded="false" />
+                <element signature="e#2269#2337#0" expanded="false" />
+                <element signature="e#2404#2635#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="20160802-t.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160802-t.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4997">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web_util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utility/web_util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1112">
+              <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+              <folding>
+                <element signature="e#1183#1196#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -12684,6 +12708,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Unit Test" />
         <option value="Python Script" />
       </list>
     </option>
@@ -12696,21 +12721,28 @@
       <list>
         <option value="$PROJECT_DIR$/etl.py" />
         <option value="$PROJECT_DIR$/crawl2.py" />
-        <option value="$PROJECT_DIR$/date_util.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/db_util.py" />
         <option value="$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db.py" />
         <option value="$PROJECT_DIR$/web_crawler.py" />
         <option value="$PROJECT_DIR$/crawler.cfg" />
         <option value="$PROJECT_DIR$/crawl3.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler.py" />
+        <option value="$PROJECT_DIR$/date_util.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/web_util.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/webTableCrawler.py" />
+        <option value="$PROJECT_DIR$/utility/web_util.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="10" />
-    <option name="y" value="88" />
+    <option name="y" value="27" />
     <option name="width" value="1320" />
-    <option name="height" value="742" />
+    <option name="height" value="803" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -12737,8 +12769,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -12775,7 +12807,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="transform" />
+              <option name="myItemId" value="webTableCrawler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webTableCrawler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -12796,11 +12846,14 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utility" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.crawl3">
+  <component name="RunManager" selected="Python.stockCrawler">
     <configuration default="false" name="crawl2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -12814,6 +12867,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="hunting" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/crawl2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="webTableCrawler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webTableCrawler" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webTableCrawler/webTableCrawler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="stockCrawler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webTableCrawler" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -12964,7 +13051,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="hunting" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/date_util.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utility/date_util.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -13003,15 +13090,19 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.date_util" />
       <item index="1" class="java.lang.String" itemvalue="Python.crawl3" />
       <item index="2" class="java.lang.String" itemvalue="Python.crawler" />
       <item index="3" class="java.lang.String" itemvalue="Python.crawl2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.webTableCrawler" />
+      <item index="5" class="java.lang.String" itemvalue="Python.stockCrawler" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.crawl2" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.stockCrawler" />
+        <item index="1" class="java.lang.String" itemvalue="Python.webTableCrawler" />
+        <item index="2" class="java.lang.String" itemvalue="Python.crawl2" />
       </list>
     </recent_temporary>
   </component>
@@ -13029,19 +13120,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="88" width="1320" height="742" extended-state="0" />
+    <frame x="10" y="27" width="1320" height="803" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19318181" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19319938" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38276836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47758886" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43644068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -13050,6 +13141,33 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19319938" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19318181" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47758886" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -13059,22 +13177,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/crawl3.py</url>
-          <line>92</line>
+          <line>89</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/date_util.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web_crawler.py</url>
-          <line>124</line>
+          <line>121</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web_crawler.py</url>
-          <line>137</line>
+          <line>134</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -13084,8 +13197,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web_crawler.py</url>
-          <line>182</line>
+          <line>179</line>
           <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -13098,133 +13221,29 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="43" />
+      <option name="time" value="61" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/transform/conversions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5850">
-          <caret line="398" column="0" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
-          <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawl3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
-          <folding>
-            <element signature="e#1653#1668#0" expanded="true" />
-            <element signature="e#2826#3453#0" expanded="false" />
-            <element signature="e#3612#4100#0" expanded="false" />
-            <element signature="e#4673#5014#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/psycopg2/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2265">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/db_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="77" selection-start-line="24" selection-start-column="77" selection-end-line="24" selection-end-column="77" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13235,9 +13254,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1653#1668#0" expanded="true" />
-            <element signature="e#2826#3453#0" expanded="false" />
-            <element signature="e#3612#4100#0" expanded="false" />
-            <element signature="e#4673#5014#0" expanded="false" />
+            <element signature="e#2820#3447#0" expanded="false" />
+            <element signature="e#3606#4094#0" expanded="false" />
+            <element signature="e#4667#5008#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13268,27 +13287,27 @@
         <state relative-caret-position="795">
           <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
           <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13299,9 +13318,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1653#1668#0" expanded="true" />
-            <element signature="e#2826#3453#0" expanded="false" />
-            <element signature="e#3612#4100#0" expanded="false" />
-            <element signature="e#4673#5014#0" expanded="false" />
+            <element signature="e#2820#3447#0" expanded="false" />
+            <element signature="e#3606#4094#0" expanded="false" />
+            <element signature="e#4667#5008#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13318,27 +13337,27 @@
         <state relative-caret-position="1350">
           <caret line="179" column="21" selection-start-line="178" selection-start-column="3" selection-end-line="179" selection-end-column="21" />
           <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13357,16 +13376,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13376,13 +13396,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13401,16 +13420,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13420,13 +13440,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13445,16 +13464,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13464,13 +13484,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -13518,32 +13537,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db_util.py">
+    <entry file="file://$PROJECT_DIR$/utility/db_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
           <caret line="24" column="77" selection-start-line="24" selection-start-column="77" selection-end-line="24" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/date_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
-          <folding>
-            <element signature="e#964#1061#0" expanded="false" />
-            <element signature="e#1123#1280#0" expanded="false" />
-            <element signature="e#1490#1670#0" expanded="false" />
-            <element signature="e#1746#2097#0" expanded="false" />
-            <element signature="e#2514#2780#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -13558,7 +13555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -13566,23 +13562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-435">
-          <caret line="154" column="24" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
-          <folding>
-            <element signature="e#1050#1063#0" expanded="true" />
-            <element signature="e#1868#5600#0" expanded="false" />
-            <element signature="e#2281#2539#0" expanded="false" />
-            <element signature="e#2945#3455#0" expanded="false" />
-            <element signature="e#3519#3666#0" expanded="false" />
-            <element signature="e#3774#4023#0" expanded="false" />
-            <element signature="e#4080#4355#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -13590,7 +13569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="398" column="0" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -13598,28 +13576,156 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler.py" />
+    <entry file="file://$USER_HOME$/python3.5/lib/python3.5/site-packages/petl/io/db_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="581">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crawler.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
+        <state relative-caret-position="19">
           <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/data/rate_105.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/data/rate_105.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6954">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/stockHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding>
+            <element signature="e#1020#2498#0" expanded="false" />
+            <element signature="e#2562#3204#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="939" column="0" selection-start-line="939" selection-start-column="0" selection-end-line="939" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="25" />
+          <folding>
+            <element signature="e#1790#5522#0" expanded="false" />
+            <element signature="e#2203#2461#0" expanded="false" />
+            <element signature="e#2867#3377#0" expanded="false" />
+            <element signature="e#3441#3588#0" expanded="false" />
+            <element signature="e#3696#3945#0" expanded="false" />
+            <element signature="e#4002#4277#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utility/web_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1112">
+          <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+          <folding>
+            <element signature="e#1183#1196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utility/date_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
+          <folding>
+            <element signature="e#1391#1742#0" expanded="false" />
+            <element signature="e#1786#2115#0" expanded="false" />
+            <element signature="e#2158#2255#0" expanded="false" />
+            <element signature="e#2317#2474#0" expanded="false" />
+            <element signature="e#2684#2864#0" expanded="false" />
+            <element signature="e#2940#3291#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/crawl3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        <state relative-caret-position="304">
+          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
           <folding>
             <element signature="e#1653#1668#0" expanded="true" />
-            <element signature="e#2826#3453#0" expanded="false" />
-            <element signature="e#3612#4100#0" expanded="false" />
-            <element signature="e#4673#5014#0" expanded="false" />
+            <element signature="e#2820#3447#0" expanded="false" />
+            <element signature="e#3606#4094#0" expanded="false" />
+            <element signature="e#4667#5008#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-329">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <folding>
+            <element signature="e#1136#1150#0" expanded="true" />
+            <element signature="e#2143#2152#0" expanded="false" />
+            <element signature="e#2208#2501#0" expanded="false" />
+            <element signature="e#2551#3051#0" expanded="false" />
+            <element signature="e#3097#3982#0" expanded="false" />
+            <element signature="e#4312#4724#0" expanded="false" />
+            <element signature="e#4746#5323#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding>
+            <element signature="e#835#844#0" expanded="true" />
+            <element signature="e#1396#2234#0" expanded="false" />
+            <element signature="e#2269#2337#0" expanded="false" />
+            <element signature="e#2404#2635#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160802-t.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4997">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

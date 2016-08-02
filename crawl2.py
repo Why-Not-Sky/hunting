@@ -36,26 +36,20 @@ feature list:
 
 import argparse
 import csv
+import json
 import logging
 import os
 import re
 import string
 import time
-#import datetime
 from datetime import date, timedelta
 from os import mkdir
 from os.path import isdir
 
-from urllib.request import urlopen
 from lxml import html
-import json
 
-import petl as etl
-import psycopg2
+from utility import date_util as util
 
-
-
-import date_util as util
 
 class Crawler():
     def __init__(self, prefix="data", origin = "origin"):
