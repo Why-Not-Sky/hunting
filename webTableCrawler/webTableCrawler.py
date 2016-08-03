@@ -24,10 +24,11 @@ import petl as etl
 
 from utility import web_util
 
-PATH = 'data/'
+PATH_RAW = 'data/'
+PATH_TRANSFORM = 'transform/'
 XPATH_HEADER = '//table[0]/thead/tr/th/text()'
 XPATH_BODY = '//table[0]//tbody/tr'
-DEFAULT_OUT = PATH + 'output.csv'
+DEFAULT_OUT = PATH_RAW + 'output.csv'
 
 class webTableCrawler():
     def  __init__(self, url=None, xheader=None, xbody=None, outfile=None, fn_clean=None, fn_transform=None, reload=False):
@@ -46,14 +47,16 @@ class webTableCrawler():
     def _do_nothing(self, x):
         return(x)
 
-    def get_doc(self, url=None, infile=None):
-        infile = infile if (infile is not None) else self.infile
+    def save_raw_data(self, url=None, infile=None):
+        self.infile = infile if (infile is not None) else self.infile
 
-        if (self.reload) or (not os.path.exists(infile)):
+        if (self.reload) or (not os.path.exists(self.infile)):
             url = url if (url is not None) else self.url
-            web_util.save_html(url, infile)
+            web_util.save_html(url, self.infile)
 
-        self.doc = web_util.get_from_file(infile)
+    def get_doc(self, url=None, infile=None):
+        self.save_raw_data(url, infile)
+        self.doc = web_util.get_from_file(self.infile)
 
         return(self.doc)
 
@@ -70,22 +73,29 @@ class webTableCrawler():
         self.header = ehead
         return (self.header)
 
-    def get_body(self, xbody=None):
+    def get_rowlist(self, xbody=None):
         xbody = xbody if (xbody is not None) else self.xpath_body
+        return(self.doc.xpath(xbody))  # //*[@id="example"]/tbody/tr[1]/td[2]  --
+
+    def get_row(self, el):
+        # lambda x: web_util.get_text(x)
+        return list(map(lambda x: web_util.get_text(x), el.xpath('td')))
+        # return (el.xpath('td'))    # x = web_util.get_text(td)
+
+    def get_body(self, xbody=None):
         if (self.header is None): self.get_header()
 
-        fn_clean = lambda x: self.column_clean(web_util.get_text(x))
-        #fn_transform = lambda x: self._row_transform(x)
-        #if self.doc is None: _
+        elist = self.get_rowlist()  # //*[@id="example"]/tbody/tr[1]/td[2]  --
 
-        elist = self.doc.xpath(xbody)  # //*[@id="example"]/tbody/tr[1]/td[2]  --
-        table = []  # loop to get each rows
+        fn_clean = lambda x: self.column_clean(x)  #(web_util.get_text(x))
+        #fn_transform = lambda x: self._row_transform(x)
 
         if self.row_transform is None:
-          table = [map(fn_clean, el.xpath('td')) for el in elist]  # loop to get each rows
+            table = [map(fn_clean, self.get_row(el)) for el in elist]  # loop to get each rows
         else:
+            table = []  # loop to get each rows
             for el in elist:
-                r= list(map(fn_clean, el.xpath('td')))
+                r= list(map(fn_clean, self.get_row(el)))
                 r = self.row_transform(r)
                 table.append(r)
 
@@ -109,7 +119,7 @@ class webTableCrawler():
 
 def test_rate_105():
     url = 'http://stock.wespai.com/rate{}'.format(105)
-    outfile = PATH + 'rate_{}.csv'.format(105)
+    outfile = PATH_RAW + 'rate_{}.csv'.format(105)
     xheader = '//*[@id="example"]/thead/tr/th/text()'  # for 'http://stock.wespai.com/rate{}'
     xbody = '//*[@id="example"]/tbody/tr'  # for  //*[@id="example"]/tbody/tr[1]  //*[@id="example"]/tbody
 
@@ -120,7 +130,7 @@ def test_rate_105():
 def test_tse():
     date_str, outdate = '20160701', '105/07/01'
     url = "http://www.twse.com.tw/ch/trading/exchange/MI_INDEX/MI_INDEX.php?download=&qdate={}&selectType=ALL".format(outdate)
-    outfile = PATH + ('{}-t.csv').format(date_str)
+    outfile = PATH_RAW + ('{}-t.csv').format(date_str)
     xheader = '//*[@id="main-content"]/table[2]/thead/tr[2]/td/text()'  #'//*[@id="main-content"]/table[2]/thead/tr[2]'
     xbody = '//table[2]/tbody/tr'  #loop for td to get the table content
 
@@ -131,7 +141,7 @@ def test_tse():
 
 def main():
     test_rate_105()
-    #test_tse()
+    test_tse()
 
 if __name__ == '__main__':
     #logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
