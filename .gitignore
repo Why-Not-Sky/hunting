@@ -5,6 +5,8 @@ data/
 origin/
 extract/
 transform/
+*.html
+*.csv
 
 # 這是註解
 [Oo]bj
