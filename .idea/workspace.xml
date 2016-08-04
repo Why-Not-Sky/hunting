@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6a49d9f-4f98-49ec-b72d-a866d29226c3" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py" afterPath="$PROJECT_DIR$/webTableCrawler/test/test_webTableCrawler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utility/web_util.py" afterPath="$PROJECT_DIR$/utility/web_util.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" afterPath="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webTableCrawler/stockHelper.py" afterPath="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webTableCrawler/webTableCrawler.py" afterPath="$PROJECT_DIR$/webTableCrawler/webTableCrawler.py" />
     </list>
     <ignored path="hunting.iws" />
@@ -12625,88 +12628,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="crawl3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawl3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-              <folding>
-                <element signature="e#1653#1668#0" expanded="true" />
-                <element signature="e#1934#1938#0" expanded="false" />
-                <element signature="e#2820#3447#0" expanded="false" />
-                <element signature="e#3606#4094#0" expanded="false" />
-                <element signature="e#4667#5008#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="webTableCrawler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+            <state relative-caret-position="282">
+              <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
               <folding>
-                <element signature="e#1136#1150#0" expanded="true" />
-                <element signature="e#1528#2141#0" expanded="false" />
-                <element signature="e#3250#3389#0" expanded="false" />
+                <element signature="e#3678#4379#0" expanded="false" />
+                <element signature="e#4414#4690#0" expanded="false" />
+                <element signature="e#4976#6502#0" expanded="false" />
+                <element signature="e#5607#6109#0" expanded="false" />
+                <element signature="e#6552#7290#0" expanded="false" />
+                <element signature="e#7033#7242#0" expanded="false" />
+                <element signature="e#7324#7478#0" expanded="false" />
+                <element signature="e#7494#7678#0" expanded="false" />
+                <element signature="e#8021#8487#0" expanded="false" />
+                <element signature="e#8529#8711#0" expanded="false" />
+                <element signature="e#8758#9247#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stockCrawler.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py">
+      <file leaf-file-name="stockHelper.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webTableCrawler/stockHelper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+            <state relative-caret-position="499">
+              <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
               <folding>
-                <element signature="e#835#844#0" expanded="true" />
-                <element signature="e#1493#2373#0" expanded="false" />
-                <element signature="e#2408#2486#0" expanded="false" />
-                <element signature="e#2553#2784#0" expanded="false" />
-                <element signature="e#2820#2983#0" expanded="false" />
-                <element signature="e#3018#3637#0" expanded="false" />
-                <element signature="e#3104#3515#0" expanded="false" />
-                <element signature="e#3689#6446#0" expanded="false" />
-                <element signature="e#3752#4689#0" expanded="false" />
-                <element signature="e#5320#5667#0" expanded="false" />
-                <element signature="e#6633#6721#0" expanded="false" />
+                <element signature="e#840#855#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="re.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/re.py">
+      <file leaf-file-name="web_util.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utility/web_util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="21" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20160802-o.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160802-o.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="0" column="810" selection-start-line="0" selection-start-column="806" selection-end-line="0" selection-end-column="810" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web_crawler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web_crawler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="201" column="26" selection-start-line="201" selection-start-column="26" selection-end-line="201" selection-end-column="26" />
-              <folding>
-                <element signature="e#1050#1060#0" expanded="true" />
-                <element signature="e#5880#6704#0" expanded="false" />
-                <element signature="e#6146#6704#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -12738,20 +12699,20 @@
         <option value="$PROJECT_DIR$/webTableCrawler.py" />
         <option value="$PROJECT_DIR$/date_util.py" />
         <option value="$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py" />
-        <option value="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
         <option value="$PROJECT_DIR$/webTableCrawler/web_util.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/data/20160802-o.html" />
         <option value="$PROJECT_DIR$/utility/web_util.py" />
         <option value="$PROJECT_DIR$/webTableCrawler/webTableCrawler.py" />
-        <option value="$PROJECT_DIR$/webTableCrawler/data/20160802-o.html" />
         <option value="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
+        <option value="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="10" />
-    <option name="y" value="27" />
+    <option name="y" value="23" />
     <option name="width" value="1430" />
-    <option name="height" value="803" />
+    <option name="height" value="812" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -12778,8 +12739,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -12834,6 +12793,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webTableCrawler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="raw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hunting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webTableCrawler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -12854,6 +12849,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -12869,14 +12866,15 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/utility" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/webTableCrawler/test" />
+      <recent name="$PROJECT_DIR$/utility" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.stockCrawler">
+  <component name="RunManager" selected="Python.stockHelper">
     <configuration default="false" name="crawl2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -12924,6 +12922,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="hunting" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webTableCrawler/stockCrawler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="stockHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webTableCrawler" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="hunting" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webTableCrawler/stockHelper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -13113,19 +13128,21 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="6">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Python.date_util" />
       <item index="1" class="java.lang.String" itemvalue="Python.crawl3" />
       <item index="2" class="java.lang.String" itemvalue="Python.crawler" />
       <item index="3" class="java.lang.String" itemvalue="Python.crawl2" />
       <item index="4" class="java.lang.String" itemvalue="Python.webTableCrawler" />
       <item index="5" class="java.lang.String" itemvalue="Python.stockCrawler" />
+      <item index="6" class="java.lang.String" itemvalue="Python.stockHelper" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.stockCrawler" />
-        <item index="1" class="java.lang.String" itemvalue="Python.webTableCrawler" />
-        <item index="2" class="java.lang.String" itemvalue="Python.crawl2" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.stockHelper" />
+        <item index="1" class="java.lang.String" itemvalue="Python.stockCrawler" />
+        <item index="2" class="java.lang.String" itemvalue="Python.webTableCrawler" />
+        <item index="3" class="java.lang.String" itemvalue="Python.crawl2" />
       </list>
     </recent_temporary>
   </component>
@@ -13143,25 +13160,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="27" width="1430" height="803" extended-state="0" />
+    <frame x="10" y="23" width="1430" height="812" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17832167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38276836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38214785" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43644068" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29986054" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -13224,19 +13241,9 @@
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py</url>
-          <line>57</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web_crawler.py</url>
           <line>201</line>
           <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -13249,37 +13256,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="83" />
+      <option name="time" value="102" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/crawl2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2175">
-          <caret line="184" column="21" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawler.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="75" column="33" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
-          <folding>
-            <element signature="e#1050#1060#0" expanded="true" />
-            <element signature="e#5880#6704#0" expanded="false" />
-            <element signature="e#6146#6704#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utility/date_util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
@@ -13540,14 +13521,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webTableCrawler/stockHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webTableCrawler/test_webTableCrawler.py">
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/test/test_webTableCrawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
@@ -13572,15 +13546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/json/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1681">
-          <caret line="311" column="0" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -13606,38 +13571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/re.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
-          <folding>
-            <element signature="e#1136#1150#0" expanded="true" />
-            <element signature="e#1528#2141#0" expanded="false" />
-            <element signature="e#3250#3389#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utility/web_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="201" column="26" selection-start-line="201" selection-start-column="26" selection-end-line="201" selection-end-column="26" />
+        <state relative-caret-position="171">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="26" />
           <folding>
             <element signature="e#1050#1060#0" expanded="true" />
             <element signature="e#5880#6704#0" expanded="false" />
@@ -13648,29 +13585,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160802-o.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
+        <state relative-caret-position="19">
           <caret line="0" column="810" selection-start-line="0" selection-start-column="806" selection-end-line="0" selection-end-column="810" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="309" column="23" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/transform/20160701-t.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160701-t.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/data/20160701-o.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/stockHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
+          <folding>
+            <element signature="e#840#855#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/webTableCrawler/stockCrawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+        <state relative-caret-position="85">
+          <caret line="67" column="49" selection-start-line="67" selection-start-column="49" selection-end-line="67" selection-end-column="49" />
           <folding>
             <element signature="e#835#844#0" expanded="true" />
-            <element signature="e#1493#2373#0" expanded="false" />
-            <element signature="e#2408#2486#0" expanded="false" />
-            <element signature="e#2553#2784#0" expanded="false" />
-            <element signature="e#2820#2983#0" expanded="false" />
-            <element signature="e#3018#3637#0" expanded="false" />
-            <element signature="e#3104#3515#0" expanded="false" />
-            <element signature="e#3689#6446#0" expanded="false" />
-            <element signature="e#3752#4689#0" expanded="false" />
-            <element signature="e#5320#5667#0" expanded="false" />
-            <element signature="e#6633#6721#0" expanded="false" />
+            <element signature="e#2781#2944#0" expanded="false" />
+            <element signature="e#3000#4202#0" expanded="false" />
+            <element signature="e#4263#4335#0" expanded="false" />
+            <element signature="e#4396#4468#0" expanded="false" />
+            <element signature="e#4525#4690#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webTableCrawler/webTableCrawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
+          <folding>
+            <element signature="e#3678#4379#0" expanded="false" />
+            <element signature="e#4414#4690#0" expanded="false" />
+            <element signature="e#4976#6502#0" expanded="false" />
+            <element signature="e#5607#6109#0" expanded="false" />
+            <element signature="e#6552#7290#0" expanded="false" />
+            <element signature="e#7033#7242#0" expanded="false" />
+            <element signature="e#7324#7478#0" expanded="false" />
+            <element signature="e#7494#7678#0" expanded="false" />
+            <element signature="e#8021#8487#0" expanded="false" />
+            <element signature="e#8529#8711#0" expanded="false" />
+            <element signature="e#8758#9247#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utility/web_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

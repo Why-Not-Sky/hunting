@@ -40,17 +40,21 @@ def save_html(url, fname):
         code.close()
 
 def get_from_file(html_file):
+    return get_etree(html_file)
+
+def get_etree(html_file):
+    # html = etree.parse(html_file)
+    # tree = html.document.fromstring(html)
+    return html.fromstring(get_data(html_file))
+
+def get_data(html_file):
     #infile = open(html_file, 'r')  # 'r')  # otc's object type is str
     #data = infile.read()   # unicode error
-    #tree = html.fromstring(data)
-
     #http: // stackoverflow.com / questions / 12468179 / unicodedecodeerror - utf8 - codec - cant - decode - byte - 0x9c
     with codecs.open(html_file, "r", encoding='utf-8', errors='ignore') as fdata:
-        tree = html.fromstring(fdata.read())
+        data = fdata.read()
 
-    #html = etree.parse(html_file)
-    #tree = html.document_fromstring(html)
-    return tree
+    return data
 
 def get_from_url(url):
     #f = urllib.request.urlopen(url)
@@ -71,9 +75,10 @@ def get_text(ele, tail=False):  #htmlElement
         if index >=1: s +=  get_text(e)
 
     if (tail==True) : s += ele.tail if ele.tail is not None else ""
-    s = re.sub("\t", "", s.strip("\r\n").strip(" "))
+    s = re.sub("\t", "", s.strip("\r\n").strip())
     return(s)
 
+# special function to get <a> element text
 def parse_text(td):  #td element
     '''
        <td><a href="http://tw.stock.yahoo.com/d/s/dividend_0050.html" target="_blank">台灣50</a></td>
