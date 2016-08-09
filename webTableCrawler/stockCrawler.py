@@ -25,6 +25,7 @@ from webTableCrawler import webTableCrawler
 import utility.db_util as db_util
 from utility import date_util
 
+
 # set up a CSV file to demonstrate with
 _CONNECTION = 'dbname=stock user=stock password=stock'
 _CONVERT_ZERO = ['', '--', '---', '---', 'x', 'X', 'null', 'NULL']  # convert illegal value into 0
