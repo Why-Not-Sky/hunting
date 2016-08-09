@@ -2,7 +2,7 @@
 '''---------------------------------------------------------------------------------------------------------------------------------------
 version  date    author     memo
 ------------------------------------------------------------------------------------------------------------------------------------------
-
+2016/08/09      delete need add connection.commit() to fresh the data
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 non-function requirement: 
@@ -18,20 +18,26 @@ feature list:
 import re
 import petl as etl
 import time
-import json
-import logging
+import string
+import psycopg2
 
-import webTableCrawler as webCrawler
+from webTableCrawler import webTableCrawler
+import utility.db_util as db_util
 from utility import date_util
-from utility import web_util
-from lxml import html
 
+# set up a CSV file to demonstrate with
+_CONNECTION = 'dbname=stock user=stock password=stock'
 _CONVERT_ZERO = ['', '--', '---', '---', 'x', 'X', 'null', 'NULL']  # convert illegal value into 0
 _ENGLISH_HEADER = 'symbol_id,name,volume,trans,amount,open,high,low,close,sign,change,af_buy,af_buy_amount,af_sell, af_sell_amout,pe'.split(
     ',')
 _HEADER = 'symbol_id,trade_date,volume,amount,open,high,low,close,change,trans'.split(',')
 
-class tseCrawler(webCrawler.webHtmlTableCrawler):
+def to_number(x=''):
+    col = re.sub(",", "", x.strip())
+    col = ''.join(list(filter(lambda x: x in string.printable, col)))
+    return '0' if (col in _CONVERT_ZERO) else col
+
+class tseCrawler(webTableCrawler.webHtmlTableCrawler):
     def __init__(self, trade_date='20160701', short=True):
         self.trade_date = trade_date
         self._taiwan_date = date_util.to_taiwan_date(trade_date)
@@ -49,8 +55,7 @@ class tseCrawler(webCrawler.webHtmlTableCrawler):
                                          fn_clean=self._clean, fn_transform=fn_transform)
 
     def _clean(self, x):
-        x=x.strip()
-        return '0' if (x in _CONVERT_ZERO) else re.sub(",", "", x)
+        return(to_number(x))
 
     def _transform(self, row=None):  # , date_str=None):
         # to-do: use dynamic arguments
@@ -65,7 +70,7 @@ class tseCrawler(webCrawler.webHtmlTableCrawler):
         else:
             super(tseCrawler, self).get_header()
 
-class otcCrawler(webCrawler.webJsonTableCarwler):
+class otcCrawler(webTableCrawler.webJsonTableCarwler):
     def __init__(self, trade_date='20160701', short=True):
         self.trade_date = trade_date
         self._taiwan_date = date_util.to_taiwan_date(trade_date)
@@ -85,8 +90,7 @@ class otcCrawler(webCrawler.webJsonTableCarwler):
                                          fn_clean=self._clean, fn_transform=fn_transform)
 
     def _clean(self, x):
-        x=x.strip()
-        return '0' if (x in _CONVERT_ZERO) else re.sub(",", "", x)
+        return(to_number(x))
 
     def _transform(self, row=None):  # , date_str=None):
         return (row[0], self.trade_date, row[8], row[9], row[4], row[5], row[6], row[2], row[3], row[10])
@@ -94,6 +98,55 @@ class otcCrawler(webCrawler.webJsonTableCarwler):
     def get_header(self):
         if (self.doc is None): self.get_doc()
         self.header = _HEADER
+
+class stockQuotesCrawler():
+    def __init__(self, trade_date=None):
+        self._trade_date = trade_date
+        self._connection = None
+        self._table = None
+
+    def set_trade_date(self, trade_date=None):
+        self._trade_date = trade_date
+
+    def _get_connection(self):
+        self._connection = self._connection if (self._connection is not None) else psycopg2.connect(_CONNECTION)
+        return self._connection
+
+    def get_historical_quotes(trade_date=None):
+        tse = get_historical_quotes_tse(trade_date=trade_date)
+        otc = get_historical_quotes_otc(trade_date=trade_date)
+
+        table = etl.stack(tse, otc)
+        return (table)
+
+    def extract(self, trade_date=None):
+        pass
+
+    def transform(self, trade_date=None):
+        trade_date = trade_date if trade_date is not None else self._trade_date
+        self._table = get_historical_quotes(trade_date=trade_date)
+
+    def _clean_db(self, trade_date='19000101'):
+        sql = "delete from quotes where trade_date = '{}';".format(date_util.str_to_date(trade_date))
+        db_util.execute_sql(connection=self._get_connection(), sql=sql)
+
+    def load(self, trade_date=None, is_delete=True):
+        if not (trade_date is None): self.set_trade_date(trade_date)
+
+        connection = self._get_connection() #psycopg2.connect(_CONNECTION)
+        if is_delete: self._clean_db(self._trade_date)
+
+        # assuming table "quotes" already exists in the database, and tse need to have the header.
+        # petl.io.db.todb(table, dbo, tablename, schema=None, commit=True, create=False, drop=False, constraints=True,
+        #                metadata=None, dialect=None, sample=1000)[source]
+        etl.todb(self._table, connection, 'quotes', drop=False) #, truncate=False)
+
+    def run(self, trade_date=None):
+        trade_date = trade_date if trade_date is not None else self._trade_date
+        self.set_trade_date(trade_date=trade_date)
+        self.extract()
+        self.transform()
+        self.load()
 
 def get_historical_quotes_tse(trade_date= '20160701'):
     sc = tseCrawler(trade_date=trade_date)
@@ -113,8 +166,11 @@ def get_historical_quotes(trade_date= '20160701'):
     return (table)
 
 def main():
-    print(get_historical_quotes_tse())
-    print(get_historical_quotes_otc())
+    trade_date = '20160808'
+    print('Crawling {}...'.format(trade_date))
+    sq = stockQuotesCrawler(trade_date)
+    #sq._clean_db(trade_date)
+    sq.run()
 
 if __name__ == '__main__':
     main()

@@ -48,8 +48,9 @@ def date_range(start_date, end_date):
     # 若是字串則自動轉換為日期
     start_date = str_to_date(start_date) if isinstance(start_date, str) else start_date
     end_date = str_to_date(end_date)  if isinstance(end_date, str) else end_date
+    nday = 1 + (end_date - start_date).days
 
-    dlist = (start_date + timedelta(n) for n in range((end_date - start_date).days))
+    dlist = list(start_date + timedelta(n) for n in range(nday))
     return dlist
 
 def date_str_add(date_str, delta=1):

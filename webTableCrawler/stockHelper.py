@@ -26,6 +26,14 @@ import stockCrawler as stockCrawler
 PERIOD = ['day', 'week', 'month', 'quater']
 PATH_TRANSFORM = 'data/'
 
+def get_wespai(url, outfile):
+    xheader = '//*[@id="example"]/thead/tr/th/text()'
+    xbody ='//*[@id="example"]/tbody/tr'
+    sc = webTableCrawler.webHtmlTableCrawler(url=url, outfile=outfile, xheader=xheader, xbody=xbody)
+    sc.run()
+    return(sc.rows)
+    #return (sc.get_table())
+
 def get_historical_quotes(trade_date='20160701'):
     tse = stockCrawler.get_historical_quotes_tse(trade_date=trade_date)
     otc = stockCrawler.get_historical_quotes_otc(trade_date=trade_date)
@@ -35,12 +43,6 @@ def get_historical_quotes(trade_date='20160701'):
 
 def test_get_historical_quotes(trade_date='20160701'):
     print(get_historical_quotes())
-
-def get_wespai(url, outfile):
-    xheader = '//*[@id="example"]/thead/tr/th/text()'
-    xbody ='//*[@id="example"]/tbody/tr'
-    sc = webTableCrawler.webHtmlTableCrawler(url=url, outfile=outfile, xheader=xheader, xbody=xbody)
-    return (sc.get_table())
 
 def get_exwright(year=105):
     url = 'http://stock.wespai.com/rate{}'.format(year)
@@ -58,8 +60,8 @@ def test_get_exwright(year=105):
 def main():
     test_get_wespai()
     test_get_exwright()
-    test_get_historical_quotes()
-    print(get_historical_quotes())
+    #test_get_historical_quotes()
+    #print(get_historical_quotes())
 
 if __name__ == '__main__':
     main()

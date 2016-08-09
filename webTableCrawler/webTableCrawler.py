@@ -110,8 +110,10 @@ class webTableCrawler(WebCrawler):
         else:
             table = []  # loop to get each rows
             for el in elist:
-                r= list(map(fn_clean, self.get_row(el)))
-                r = self.row_transform(r)
+                #r = list(map(fn_clean, self.get_row(el)))  #error due to signed was cleaned
+                #r = self.row_transform(r)
+                r = self.row_transform(self.get_row(el))
+                r = list(map(fn_clean, r))
                 table.append(r)
 
         return (table)
