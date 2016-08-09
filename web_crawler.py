@@ -35,7 +35,7 @@ from lxml import html
 
 import utility.db_util as db
 from utility import date_util as util
-
+from utility import web_util as webutil
 
 class data_object():
     def  __init__(self, dtype, url):
@@ -105,7 +105,8 @@ class WebCrawler():
         ttime = str(int(time.time() * 100))
         url = self.url.format(self._taiwan_date, ttime)
         fname = self.origin_file
-        util.download_data_by_url(url, fname)
+        webutil.save_html(url, fname)
+        #util.download_data_by_url(url, fname)
 
     def transform(self, taiwan_date_str=None):
         # Get html page and parse as tree

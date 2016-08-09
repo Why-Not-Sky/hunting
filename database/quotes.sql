@@ -12,5 +12,8 @@ CREATE TABLE quotes
    low          float NULL,                                              --最低價
    close        float NULL,                                              --收盤價
    change       float NULL,                                             --漲跌價差
-   trans        float NULL                     --成交筆數 (Number of Transactions)
-)
+   trans        float NULL,                     --成交筆數 (Number of Transactions)
+   frequency		char (1) NULL		--報價頻率 5min/ hour/ day/ week/ month/ ....
+);
+--拆表格與否？frequency: N + Period 
+--由row及column之間的互動關係決定 (日週月，各類指標...)
