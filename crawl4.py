@@ -43,7 +43,7 @@ import os
 from datetime import date, timedelta
 
 from utility import date_util as util
-from webTableCrawler import stockCrawler as crawler
+from webCrawler import stockCrawler as crawler
 
 _CONFIG_FILE = 'crawler.cfg'
 

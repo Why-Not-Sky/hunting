@@ -24,6 +24,16 @@ import datetime
 def get_wespai(url=None, outfile=None):
     print(crawler.get_wespai(url, outfile))
 
+'''---------------
+價值面：
+    經營資訊
+        月營收資料
+'''
+
+def get_revenue_monthly(month='201607'):
+    'http://mops.twse.com.tw/nas/t21/sii/t21sc03_104_4_0.html'
+    pass
+
 def get_roe():
     today = datetime.date.today().strftime('%Y%m%d')
     url, outfile = 'http://stock.wespai.com/p/20494', '{}-ROE.CSV'.format(today)
