@@ -1,3 +1,0 @@
-select count(*) from quotes;
-select * from quotes;
-delete from quotes;

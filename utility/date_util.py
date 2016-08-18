@@ -3,25 +3,10 @@
 version  date    author     memo
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
-------------------------------------------------------------------------------------------------------------------------------------------
-non-function requirement: 
-    * 
-    * 
-    * 
-
-------------------------------------------------------------------------------------------------------------------------------------------
-feature list:
-    * 
-    * 
-    * 
-
 ---------------------------------------------------------------------------------------------------------------------------------------'''
 import time
-#import datetime
-from datetime import date, timedelta
-import requests
+from datetime import date, timedelta, datetime
+from dateutil.rrule import rrule, MONTHLY
 
 def date_to_int(date_str='20160712', esc_char='/'):
     date_str = date_str.replace(esc_char, '')
@@ -52,6 +37,24 @@ def date_range(start_date, end_date):
 
     dlist = list(start_date + timedelta(n) for n in range(nday))
     return dlist
+
+def month_range(start_month, end_month, type='s'):
+    """ date_range(201601, 201607) """
+    # 若是字串則自動轉換為日期
+    start_month = str_to_date(start_month+'01')
+    end_month = str_to_date(end_month+'01')
+
+    dlist = [dt for dt in rrule(MONTHLY, dtstart=start_month, until=end_month)]
+
+    if (type=='s'): dlist = [d.strftime('%Y%m') for d in dlist]
+    #dlist = list((start_month + timedelta(n)).strftime('%Y%m') for n in range(nm))
+
+    return dlist
+
+def test_month_range():
+    start_month, end_month = '201508', '201607'
+    print (month_range(start_month, end_month))
+    print(month_range(start_month, end_month, 'm'))
 
 def date_str_add(date_str, delta=1):
     d = str_to_date(date_str)
@@ -94,7 +97,8 @@ def test_date_rang():
         print('Crawling {} '.format(date_str))
 
 def main():
-    test_date_rang()
+    test_month_range()
+    #test_date_rang()
 
 if __name__ == '__main__':
     main()

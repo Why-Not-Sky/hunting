@@ -38,7 +38,7 @@ _OUTPUT_CSV_FILE = 'output.csv'
 _OUTPUT_HTML_FILE = 'output.html'
 
 class WebCrawler():
-    def __init__(self, url, rawfile=None, encode='utf-8', reload=False, raw_path=PATH_RAW, data_path=PATH_TRANSFORM):
+    def __init__(self, url, rawfile=None, encode='utf-8', reload=True, raw_path=PATH_RAW, data_path=PATH_TRANSFORM):
         ''' Make directory if not exist when initialize '''
         if not isdir(raw_path): mkdir(raw_path)
         self.raw_path = raw_path
@@ -59,7 +59,8 @@ class WebCrawler():
 
         if (self.reload) or (not os.path.exists(sfile)):
             url = url if (url is not None) else self.url
-            self.encode = web_util.save_html(url, sfile)
+            html_encode = web_util.save_html(url, sfile)
+            if self.encode is None: self.encode = html_encode
 
     def get_raw_data(self):
         sfile = '' if self.raw_path is None else self.raw_path + self.rawfile
@@ -67,7 +68,7 @@ class WebCrawler():
         return(web_util.get_data(sfile, encode=self.encode))
 
 class webTableCrawler(WebCrawler):
-    def  __init__(self, url=None, outfile=None, encode='utf-8', reload=False, fn_clean=None, fn_transform=None):
+    def  __init__(self, url=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None):
         outfile= outfile if (outfile is not None) else _OUTPUT_CSV_FILE
         rawfile = outfile.lower().replace('.csv', '.html')
 
@@ -77,6 +78,7 @@ class webTableCrawler(WebCrawler):
         self.doc = self.get_doc()
         self.rows = None
         self.header = None
+        self.cols_to_clean = cols_to_clean
         self.cell_clean =  fn_clean if (fn_clean is not None) else self._do_nothing
         self.row_transform = fn_transform if (fn_transform is not None) else self._do_nothing
         #self.filter = fn_filter if (fn_filter is not None) else self._do_nothing
@@ -112,9 +114,12 @@ class webTableCrawler(WebCrawler):
         else:
             table = []  # loop to get each rows
             for el in elist:
+                # extned the fileter mechanism in transform
                 r = self.row_transform(self.get_row(el))
-                r = list(map(fn_clean, r))
-                table.append(r)
+                if (r is not None) and len(r) > 0:
+                    #r = list(map(fn_clean, r))
+                    r = [self.cell_clean(r) if (self.cols_to_clean is None) or (idx in self.cols_to_clean) else r for idx, r in enumerate(r)]
+                    table.append(r)
 
         return (table)
 
@@ -138,8 +143,8 @@ class webTableCrawler(WebCrawler):
         #logging.debug('\n{}'.format(self.rows))
 
 class webHtmlTableCrawler(webTableCrawler):
-    def __init__(self, url, outfile=None, encode='utf-8', reload=False, fn_clean=None, fn_transform=None, xheader=None, xbody=None):
-        super(webHtmlTableCrawler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, fn_transform=fn_transform)
+    def __init__(self, url, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
+        super(webHtmlTableCrawler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean, fn_transform=fn_transform)
 
         self.xpath_header = xheader # if (xheader is not None) else XPATH_HEADER
         self.xpath_body = xbody # if (xbody is not None) else XPATH_BODY
@@ -154,6 +159,7 @@ class webHtmlTableCrawler(webTableCrawler):
         xheader = xheader if (xheader is not None) else self.xpath_header
         if xheader is None: return None
 
+        #'//*[@id="example_wrapper"]/div[2]/div[1]/div/table/thead/tr'
         ehead = self.doc.xpath(xheader)  # pass header by '//*[@id="example"]/thead/tr/th/text()
         # work pass header '//*[@id="example"]/thead/tr/th' if special tag in header
         # f_parse = lambda x: web_util.get_text(x)
@@ -174,8 +180,8 @@ class webHtmlTableCrawler(webTableCrawler):
         # return (el.xpath('td'))    # x = web_util.get_text(td)
 
 class webJsonTableCarwler(webTableCrawler):
-    def __init__(self, url, outfile=None, encode='utf-8', reload=False, fn_clean=None, fn_transform=None, xheader=None, xbody=None):
-        super(webJsonTableCarwler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean,
+    def __init__(self, url, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
+        super(webJsonTableCarwler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean,
                                                   fn_transform=fn_transform)
 
         self.xheader = xheader
@@ -207,6 +213,7 @@ def test_webTableCrawler():
 dict_wespai = {
     'url' : 'http://stock.wespai.com/rate105'
     ,'outfile' :  'rate_105.csv'
+    #,'xheader' : '//*[@id="example_wrapper"]/div[2]/div[1]/div/table/thead/tr/text()'
     ,'xheader' : '//*[@id="example"]/thead/tr/th/text()'
     ,'xbody' : '//*[@id="example"]/tbody/tr'
 }
@@ -216,7 +223,8 @@ def test_webHtmlTableCrawler(dict=None):
     outfile = dict_wespai['outfile']
     xheader = dict_wespai['xheader']
     xbody = dict_wespai['xbody']
-    sc = webHtmlTableCrawler(url=url, outfile=outfile, xheader=xheader, xbody=xbody)
+    sc = webHtmlTableCrawler(url=url, outfile=outfile, encode='utf-8', xheader=xheader, xbody=xbody, reload=True)
+    #sc = webHtmlTableCrawler(**dict_wespai)
 
     sc.run()
     print(sc.rows)
@@ -225,13 +233,15 @@ def get_tse_dict(trade_date='20160701'):
     taiwan_date = date_util.to_taiwan_date(trade_date)
     return {'url': "http://www.twse.com.tw/ch/trading/exchange/MI_INDEX/MI_INDEX.php?download=&qdate={}&selectType=ALL".format(taiwan_date)
         , 'outfile': ('{}-t.csv').format(trade_date)
-        , 'xheader': '//*[@id="main-content"]/table[2]/thead/tr[2]/td/text()'  #'//*[@id="main-content"]/table[2]/thead/tr[2]'
+        , 'xheader': '//*[@id="main-content"]/table[2]/thead/tr[2]/td/text()'
+        #, 'xheader': '//*[@id="main-content"]/table[2]/thead/tr[2]'
         , 'xbody': '//table[2]/tbody/tr'  #loop for td to get the table content
               }
 
 def get_tse(trade_date='20160701'):
     dict = get_tse_dict(trade_date)
-    sc = webHtmlTableCrawler(url=dict['url'], outfile=dict['outfile'], xheader=dict['xheader'], xbody=dict['xbody'])
+    #sc = webHtmlTableCrawler(url=dict['url'], outfile=dict['outfile'], xheader=dict['xheader'], xbody=dict['xbody'])
+    sc = webHtmlTableCrawler(**dict)
     sc.run()
     return (sc.rows)
 
@@ -256,10 +266,11 @@ def get_otc(trade_date='20160701'):
     return (sc.rows)
 
 def main():
-    test_webTableCrawler()
-    test_webHtmlTableCrawler()
-    get_tse()   #test_webHtmlTableCrawler
-    get_otc()   #test_webJsonTableCarwler
+    #test_webTableCrawler()
+    test_webHtmlTableCrawler()  # auto chinese header
+    test_webJsonTableCarwler()  # no header
+    print(get_tse())   #test_webHtmlTableCrawler
+    #print(get_otc())  #test_webJsonTableCarwler
 
 if __name__ == '__main__':
     #logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
