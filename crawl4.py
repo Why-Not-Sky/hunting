@@ -87,7 +87,7 @@ class Crawler():
         self._update_last_run(date_str)
         pass
 
-    def get_from_arguments(self):
+    def _get_from_arguments(self):
         parser = argparse.ArgumentParser(description='Crawl data at assigned day')
         parser.add_argument('day', type=int, nargs='*',
                             help='assigned day (format: YYYYMMDD), default is today')  # end_date
@@ -124,11 +124,11 @@ class Crawler():
 
     def get_duration(self):
         # get from the arguments first
-        from_day, to_day = self.get_from_arguments()
+        from_day, to_day = self._get_from_arguments()
 
         # get from the config
         if (from_day is None):
-            from_day, to_day = self.get_from_config()
+            from_day, to_day = self._get_from_config()
 
         # if none, default is today
         if (from_day is None):
@@ -143,8 +143,8 @@ def main():
       ex: crawl 20160701 20160712
     '''
     crawler = Crawler()
-    #crawler.run('20160101', '20160530')
-    crawler.run('20160209', '20160530')
+    #crawler.run('20160101', '2016730')
+    crawler.run()
 
 if __name__ == '__main__':
     main()

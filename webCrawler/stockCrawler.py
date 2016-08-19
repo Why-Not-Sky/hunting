@@ -55,6 +55,9 @@ class tseCrawler(webTableCrawler.webHtmlTableCrawler):
 
     def _transform(self, row=None):  # , date_str=None):
         # to-do: use dynamic arguments
+        # filter non open market data
+        if len(row[0]) != 4: return (None)
+
         sign = '-' if len(row[9]) == 1 and row[9] in ['-', u'－'] else ''
         change = sign + row[10]
         return (row[0], self.trade_date, row[2], row[4], row[5], row[6], row[7], row[8], change, row[3])
@@ -90,6 +93,9 @@ class otcCrawler(webTableCrawler.webJsonTableCarwler):
         return(stock_util.to_number(x))
 
     def _transform(self, row=None):  # , date_str=None):
+        # filter non open market data
+        if len(row[0]) != 4: return (None)
+
         return (row[0], self.trade_date, row[8], row[9], row[4], row[5], row[6], row[2], row[3], row[10])
 
     def get_header(self):

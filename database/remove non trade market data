@@ -1,0 +1,4 @@
+select * into symbol_not from symbol where length(symbol_id) != 4;
+delete from symbol where length(symbol_id) != 4;
+
+delete from quotes where length(symbol_id) != 4;
