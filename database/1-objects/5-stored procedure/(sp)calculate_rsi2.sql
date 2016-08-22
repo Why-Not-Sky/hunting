@@ -14,7 +14,8 @@ CREATE OR REPLACE FUNCTION calculate_rsi2(begin_date date, end_date date, n int,
     RETURNS void AS $$
 DECLARE start_date date := begin_date - n - 16;  --wide range to filtered the data
 BEGIN
-     delete from indicator where idc_id = idc and idc_date between begin_date and end_date;
+
+    delete from indicator where idc_id = idc and idc_date between begin_date and end_date;
       
     with periods as (
             select m.trade_date as from_date, s.trade_date as to_date
