@@ -61,10 +61,12 @@ class Crawler():
         if start_date is None:
             start_date, end_date = self.get_duration()
 
-        max_error = 100
+        max_error = 1000
         error_times = 0
 
         sq = crawler.stockQuotesCrawler()
+
+        #tse = crawler.tseCrawler()
 
         dlist = util.date_range(start_date, end_date)
 
@@ -73,6 +75,7 @@ class Crawler():
 
             try:
                 sq.run(date_str)
+                #tse.run(date_str)
                 self._write_execution_log(date_str)
                 print('Crawling {} done! '.format(date_str))
                 error_times = 0
@@ -143,8 +146,11 @@ def main():
       ex: crawl 20160701 20160712
     '''
     crawler = Crawler()
-    #crawler.run('20160101', '2016730')
     crawler.run()
+    #crawler.run('20160101', '2016730')
+    #otc only data from 20070423
+    #crawler.run('20000120', '20041231')
+    #crawler.run('20070101', '20070423')
 
 if __name__ == '__main__':
     main()

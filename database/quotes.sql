@@ -21,14 +21,18 @@ create index idx_symobl on quotes (symbol_id, trade_date);
 --拆表格與否？frequency: N + Period 
 --由row及column之間的互動關係決定 (日週月，各類指標...)
 ------------------------------------------------------------------
---  TABLE symbol
+-- CREATE SEQUENCE rno;
+-- ALTER TABLE opendate ALTER rno SET DEFAULT NEXTVAL('rno');
 ------------------------------------------------------------------
-
-CREATE TABLE period
+--DROP TABLE opendate;
+CREATE TABLE opendate
 (
    trade_date    date,
    weekday		int null,
    weeks			 int null,  --週線
    months		 int null,  --月線
-   years		   	int null	--年線
+   years		   	int null	,--年線
+   rno			SERIAL
 );
+
+create index idx_date on opendate (trade_date, years);

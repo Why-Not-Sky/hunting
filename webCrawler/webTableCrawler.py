@@ -65,7 +65,8 @@ class WebCrawler():
     def get_raw_data(self):
         sfile = '' if self.raw_path is None else self.raw_path + self.rawfile
         self._save_raw_data(self.url, sfile)
-        return(web_util.get_data(sfile, encode=self.encode))
+        data = web_util.get_data(sfile, encode=self.encode)
+        return(data)
 
 class webTableCrawler(WebCrawler):
     def  __init__(self, url=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None):

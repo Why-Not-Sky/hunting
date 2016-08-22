@@ -14,5 +14,7 @@ where not exists( select distinct trade_date from quotes mi where change < 0 and
 
 select count(*) from quotes;
 
-
+select count(*) from symbol;
+select * from quotes where length(symbol_id) != 4
+delete from indicator where length(symbol_id) != 4
 
