@@ -1,6 +1,5 @@
 --select * from calculate_rsi2('20160819', '20160819', 14, 1);
 --select * from indicator where idc_id = 1 and idc_date between '20160819' and '20160819' order by symbol_id, idc_date desc;
---select * from rsi_data where idc_id = 1 and idc_date between '20160819' and '20160819';
 ------------------------------------------------------------------------------------------------------
 --http://www.cmoney.tw/notes/note-detail.aspx?nid=6162
 --http://ntd2u.net/thread-3690-1-1.html
@@ -18,38 +17,34 @@ BEGIN
 
     raise notice 'Calcualting (% ~ %)...', start_date, end_date;
     delete from indicator where idc_id = idc and idc_date between begin_date and end_date;
-    --delete from rsi_data; --where idc_id = idc and idc_date between begin_date and end_date;
-    
-    -- need to check the from_date and to_date...  
+      
     with periods as (
             select s.trade_date as from_date, m.trade_date as to_date
     		  from opendate m
     			  join opendate s on ((m.rno - s.rno) = (n-1))
     		where m.trade_date between begin_date and end_date),   
     
-         rsi_d as (
-    		 select symbol_id, m.to_date as trade_date, count(*) as cnt   --s.close, s.trade_date as s_date
+         rsi_data as (
+    		 select symbol_id, m.from_date as trade_date, count(*) as cnt   --s.close, s.trade_date as s_date
     			  , avg(case when change >0 then change else 0 end) as gain
     			  , avg (case when change < 0 then -1 * change else 0 end) as loss
     		 from periods m
-    			  join quotes s on (s.trade_date between '20160802' and '20160819')--m.from_date and m.to_date)   --performance for only the calculate range,
-    		where s.trade_date between '20160720' and '20160819'--start_date and end_date
-    		group by symbol_id, m.to_date),
+    			  join quotes s on (s.trade_date between m.from_date and m.to_date)   --performance for only the calculate range,
+    		where s.trade_date between start_date and end_date
+    		group by symbol_id, m.from_date),
     	
     	 rsi_n as (
         	select m.symbol_id, m.trade_date, cnt
     			  , gain, loss
     			  , (case when loss=0 then 999999 else  gain/loss end) as rs
               	  , (case when (gain+loss)=0 then 50 else 100 * gain/(gain+loss) end) as rsi
-    		 from rsi_d m)
+    		 from rsi_data m)
+    		
 
-    --insert into rsi_data (idc_id, symbol_id, idc_date, gain, loss)
-    --select 1 as idc, symbol_id, trade_date, gain, loss from r_data;
-        		
     insert into indicator (idc_id, symbol_id, idc_date, idc_value)
     select idc as idc_id, symbol_id, trade_date, rsi
       from rsi_n 
      order by 1, 2 desc;
-
+    
     END;
     $$ LANGUAGE plpgsql;
