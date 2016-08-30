@@ -9,16 +9,7 @@ version  date    author     memo
        <td>07/28</td>
        <td> </td>
 
-------------------------------------------------------------------------------------------------------------------------------------------
-non-function requirement: 
-    * 
-    * 
-    *
-------------------------------------------------------------------------------------------------------------------------------------------
-feature list:
-    * 
-    * 
-    *
+
 ---------------------------------------------------------------------------------------------------------------------------------------'''
 import codecs
 import lxml
@@ -26,24 +17,26 @@ import requests
 import re
 from os import path, mkdir
 from lxml import html
+import lxml.html.clean as clean
 import chardet
 
 
-def save_html(url, fname):
-    r = requests.get(url)
+def save_html(url, fname, payload=None):
+    r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
     prefix = path.dirname(fname)  # path.abspath(fname))
     if (prefix != '') and (not path.isdir(prefix)): mkdir(prefix)
 
-    dic = chardet.detect(r.content[:10])
-    fcode = dic['encoding']
-    # fcode = 'utf-8'
+    #dic = chardet.detect(r.content[:10])
+    #fcode = dic['encoding']
+    # 2016/08/24: http://sh3ll.me/2014/06/18/python-requests-encoding/
+    #r.encoding = 'utf8'
+    r.encoding = r.apparent_encoding
 
     with open(fname, "wb") as code:
         code.write(r.content)
-        # code.write(r.text.encode(fcode))
         code.close()
 
-    return (fcode)
+    return (r.encoding)
 
 
 def get_from_file(html_file):
@@ -51,7 +44,8 @@ def get_from_file(html_file):
 
 
 def get_etree(html_file):
-    return html.fromstring(get_data(html_file))
+    #[2016/08/24: add clean_html]
+    return clean.clean_html(html.fromstring(get_data(html_file)))
 
 
 def get_header(html_file, xheader=''):
@@ -122,7 +116,50 @@ def parse_text(td):  # td element
 def get_all_texts(el, class_name):
     return [e.text_content() for e in el.find_class(class_name)]
 
+def retrieve_html_table(url=None, payload=None, xtable=None):
+    r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
+
+    print (r.encoding)
+    #r.encoding = 'utf-8'
+    r.encoding = r.apparent_encoding
+
+    tree = clean.clean_html(html.fromstring(r.text))
+
+    etable = tree.xpath(xtable)
+    rows = []
+    for tb in etable:
+        row = list(map(lambda x: get_text(x), tb.xpath('td')))
+        rows.append(row)
+
+    return(rows)
+
+
+def test_retrieve_html_table():
+    trade_date = '105/08/23'
+    payload = {
+        'download': None,
+        'qdate': trade_date,
+        'select2': 'ALLBUT0999',
+        'sorting': 'by_issue'
+    }
+
+    url = 'http://www.twse.com.tw/ch/trading/fund/T86/T86.php'
+    xtable = '//*[@id="tbl-sortable"]/tbody/tr'
+    rows = retrieve_html_table(url=url, payload=payload, xtable=xtable)
+    print ('number of rows:{}'.format(len(rows)), rows)
+
+    #not worked by request, some inform not passed
+    url_get = url + '?' + 'download=&qdate={}&select2=ALLBUT0999&sorting=by_issue'.format(trade_date)
+    #print(retrieve_html_table(url=url_get, xtable=xtable))
+
+    url_otc = 'http://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_print.php?l=zh-tw&se=EW&t=D&d={}&s=0,asc,0'.format(trade_date)
+    xbody = '//tbody/tr' # '/html/body/table/tbody/tr'
+    rows = retrieve_html_table(url=url_otc, xtable=xbody)
+    print ('number of rows:{}'.format(len(rows)), rows)
+
+
 def main():
+    test_retrieve_html_table()
     pass
     #test_post_data()
     #test_get_header()

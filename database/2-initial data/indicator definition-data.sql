@@ -2,8 +2,8 @@ truncate table indicator_definition;
 insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (1, 'rsi:14日', 'rsi', 14, 'd');
 insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (2, 'rsi:28日', 'rsi', 28, 'd');
 
-insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (11, 'rsv:日', 'rsv', 1, 'd');
-insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (12, 'rsv:周', 'rsv', 1, 'w');
+insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (11, 'rsv:日', 'rsv', 9, 'd');
+insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (12, 'rsv:周', 'rsv', 9, 'w');
 insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (13, 'rsv:月', 'rsv', 1, 'm');
 insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (14, 'rsv:季', 'rsv', 1, 'q');
 insert into indicator_definition(idc_id, idc_name, idc_type, period, cycle) values (15, 'rsv:年', 'rsv', 1, 'y');

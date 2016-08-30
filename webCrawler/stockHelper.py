@@ -2,15 +2,6 @@
 '''---------------------------------------------------------------------------------------------------------------------------------------
 version  date    author     memo
 ------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-------------------------------------------------------------------------------------------------------------------------------------------
-non-function requirement: 
-    * 
-    * 
-    * 
-
 ------------------------------------------------------------------------------------------------------------------------------------------
 feature list:
     * 
@@ -29,7 +20,7 @@ from webCrawler import stockCrawler, webTableCrawler
 PERIOD = ['day', 'week', 'month', 'quater']
 PATH_TRANSFORM = 'data/'
 
-def get_revenue_tse(str_month='201607'):
+def crawl_revenue_tse(str_month='201607'):
     year, month = int(str_month[:4])-1911, int(str_month[5:])
     outfile = str_month + '-t' + '.csv'
     url = 'http://mops.twse.com.tw/nas/t21/sii/t21sc03_{}_{}_0.html'.format(year, month)
@@ -87,6 +78,14 @@ def crawl_historical_quotes(start_date='20160701', end_date='20160703'):
         rc.run(date_str)
         print(rc.rows)
 
+def crawl_quarterly_profit(start_q='200701', end_q='201602'):
+    dlist = date_util.quarter_range(start_q, end_q)
+
+    for d in dlist:
+        year, quarter = d[:4], d[4:]
+        rc = stockCrawler.profitCrawler(year, quarter)
+        rc.run()
+        print(rc.rows)
 
 def test_get_revenue():
     start_month, end_month = '201101', '201112'
@@ -95,12 +94,10 @@ def test_get_revenue():
     crawl_monthly_revenue(start_month, end_month)
 
 def main():
+    #crawl_quarterly_profit('201601', '201602')
     #crawl_monthly_revenue('201101', '201606')
-    #crawl_monthly_revenue('201607', '201607')
-    crawl_historical_quotes('20160101', '20160131')
-    exit()
-
-    print(get_revenue_tse())
+    crawl_monthly_revenue('201607', '201607')
+    #crawl_historical_quotes('20160822', '20160822')
     print(crawl_exwright())
 
 if __name__ == '__main__':

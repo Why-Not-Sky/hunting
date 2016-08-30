@@ -19,9 +19,12 @@ import re
 import petl
 import time
 import psycopg2
+import requests
+import lxml.html as html
+import lxml.html.clean as clean
 
 import utility.db_util as db_util
-from utility import date_util, math_util, stock_util
+from utility import date_util, math_util, stock_util, web_util
 from webCrawler import webTableCrawler
 #import webHtmlTableCrawler, webJsonTableCarwler
 
@@ -174,6 +177,75 @@ class stockQuotesCrawler(etl):
         #self.transform()
         #self.load()
 
+class profitCrawler(etl):
+    def __init__(self, years='2015', season='01'):
+        self._connection = None
+        self.rows = None
+        self._year = int(years)
+        self._taiwan_year = self._year - 1911
+        self._season = season
+        self._outfile = years + 'Q' + season[1] + '.csv'
+        self._encode = 'Big5'
+        self._header = ['公司', '公司名稱', '產業別', '每股盈餘', '普通股每股面額', '營業收入', '營業利益', '營業外收入及支出', '稅後淨利']
+        self._english = ['symbol_id',  'eps', 'revenue'
+            , 'profit', 'extra_income', 'profit_after_tax', 'years', 'season', 'period']
+        self.cols_to_clean = [3, 4, 5, 6, 7, 8]
+        self._url = 'http://mops.twse.com.tw/mops/web/t163sb19?step=1&firstin=1&TYPEK=sii&year=104&season=01'.format(self._taiwan_year, self._season)
+        self._source = [
+            dict(url='http://mops.twse.com.tw/mops/web/t163sb19?step=1&firstin=1&TYPEK=sii&year=104&season=01'.format(self._taiwan_year, self._season),
+                 outfile=self._outfile, reload=False, encode=self._encode, xheader=None,
+                 fn_clean=stock_util.to_number, cols_to_clean=self.cols_to_clean, fn_transform=self._transform)
+        ]
+
+        super(profitCrawler, self).__init__()
+
+    def _to_big5(self, x=''):
+        x = x.encode('latin1', 'ignore').decode('big5')  # for chinese name, but not use for import caused normalization
+        return x
+
+    #todo: each column's clean function is different.
+    #1102,亞洲水泥股份有限公司,水泥工業,0.47,新台幣                 10.0000元,"15,362,530","1,037,375","807,325","1,542,288"
+    def _transform(self, row=None):  # , date_str=None):
+        if len(row[0]) != 4: return []
+        r = [stock_util.to_number(row[idx]) if idx >= 3 else row[idx].strip() for idx, r in enumerate(row)]
+        return [r[0], r[3], r[5], r[6], r[7], r[8], self._year, self._season, 'Q']
+
+    def get_rows(self, txt=None):
+        tree = clean.clean_html(html.fromstring(txt))
+        xtable = '//*[@id="table01"]/table'
+        etable = tree.xpath(xtable)
+        rows = []
+        for tb in etable:
+            er = tb.xpath('tr')
+            for tr in er:
+                row = list(map(lambda x: x.strip(), tr.xpath('td/text()')))
+                if len(row) > 0:
+                    rows.append(self._transform(row))
+        return rows
+
+    def transform(self):
+        #src = self._source[0]
+        #sc = webTableCrawler.WebCrawler(**src)
+        sc = webTableCrawler.WebCrawler(url=self._url)
+        table = self.get_rows(sc.rawdata)
+
+        self.rows = petl.headers.pushheader(table, self._english)
+
+        if (self.rows is not None):
+            petl.tocsv(self.rows, source=sc.data_path + self._outfile)
+
+        return (self.rows)
+
+    def _clean_db(self):
+        sql = "delete from profit where years={} and season={} and period='Q';".format(self._year, self._season)
+        db_util.execute_sql(connection=self._get_connection(), sql=sql)
+
+    def load(self):
+        connection = self._get_connection()  # psycopg2.connect(_CONNECTION)
+        self._clean_db()
+
+        petl.todb(self.rows, connection, 'profit', drop=False)  # , truncate=False)
+
 class revenueCrawler(etl):
     def __init__(self, monthly=None):
         self._connection = None
@@ -244,11 +316,91 @@ class revenueCrawler(etl):
 
         petl.todb(self.rows, connection, 'revenue', drop=False)  # , truncate=False)
 
+'''Foreign & Institutional Investors Daily Trading sort by stock code
+tse: http://www.twse.com.tw/ch/trading/fund/T86/T86.php
+otc:http://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge.php?l=zh-tw
+Foreign&MainlandChinese(外資), SecuritiesInvestmentCo(投信), Dealers(自營商)(proprietary),Dealers(hedge)
+'''
+class institutionalDailyTradingCrawler(etl):
+    def __init__(self, trade_date=None):
+        super(institutionalDailyTradingCrawler, self).__init__()
+
+        self._trade_date = trade_date
+        self._taiwan_date =  self._taiwan_date = date_util.to_taiwan_date(trade_date)
+        self.rows = None
+        self._outfile = trade_date + '.csv'
+
+        self._header = ['代號',	'名稱',	'外資買',	'外資賣',	'外資淨買','投信買','投信賣','投信淨買','自營商淨買','自營商(自行買賣)買',	'自營商(自行買賣)賣','自營商(自行買賣)淨買','自營商(避險)買','自營商(避險)賣',	'自營商(避險)淨買','三大法人買賣超']
+        self._english = ['code', 'trade_date', 'foregin_purchase','foregin_sale','foregin_net_purchase','sic_purchase', 'sic_sale', 'sic_net_purchase'
+            ,'dealers_net_purchase','dealers_prop_purchase','dealers_prop_sale','dealers_prop_net_purchase', 'dealers_hedge_purchase', 'Dealers_hedge_sale', 'dealers_hedge_net_purchase',	'total_net_purchase']
+        self.cols_to_clean =  list(range(2, len(self._english)))
+
+        self._source = [
+            dict(url='http://www.twse.com.tw/ch/trading/fund/T86/T86.php?',
+                 payload = {
+                    'download': None,
+                    'qdate': self._taiwan_date,
+                    'select2': 'ALLBUT0999',
+                    'sorting': 'by_issue' #'by_stkno'
+                 },
+                 outfile=trade_date + '-t' + '.csv', reload=True,
+                 fn_clean=stock_util.to_number, cols_to_clean=self.cols_to_clean, fn_transform=self._transform,
+                 xbody='//*[@id="tbl-sortable"]/tbody/tr'),
+            dict(url='http://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_print.php?l=zh-tw&se=EW&t=D&d={}&s=0,asc,0'.format(self._taiwan_date),
+                 outfile=trade_date + '-o' + '.csv', reload=True,
+                 fn_clean=stock_util.to_number, cols_to_clean=self.cols_to_clean, fn_transform=self._transform,
+                 xbody='//tbody/tr')
+        ]
+
+    def _transform(self, row=None):  # , date_str=None):
+        #if len(row[0]) != 4: return []
+        r = [stock_util.to_number(row[idx]) if idx >= 2 else row[idx].strip() for idx, r in enumerate(row)]
+        r[1] = self._trade_date
+
+        return (r)
+
+    def transform(self):
+        table = None
+        for src in self._source:
+            sc = webTableCrawler.webHtmlTableCrawler(**src)
+            r = sc.get_table()
+            if (r is not None) and (len(r) > 0):
+                table = petl.stack(table, r) if table is not None else r
+                #print ('number of rows:{}'.format(len(table)))
+
+        self.rows = petl.headers.pushheader(table, self._english)
+        petl.tocsv(self.rows, source=sc.data_path + self._outfile)
+
+        return (self.rows)
+
+    def _clean_db(self):
+        return
+        sql = "delete from institution_trading where trade_date={};".format(self._trade_dateh)
+        db_util.execute_sql(connection=self._get_connection(), sql=sql)
+
+    def load(self):
+        return
+        connection = self._get_connection()
+        self._clean_db()
+
+        petl.todb(self.rows, connection, 'institution_trading', drop=False)  # , truncate=False)
+
+
 def test_stockQuotesCrawler():
     trade_date = '20160810'
     print('Crawling {}...'.format(trade_date))
     sq = stockQuotesCrawler(trade_date)
     sq.run()
+
+
+def test_institutionalDailyTradingCrawler():
+    trade_date = '20160823'
+    print('Crawling {}...'.format(trade_date))
+    sq = institutionalDailyTradingCrawler(trade_date)
+    sq.run()
+    print('number of rows:{}'.format(len(sq.rows)))
+    print (sq.rows)
+
 
 def test_revenueCrawler():
     start_month = '201112'
@@ -256,9 +408,16 @@ def test_revenueCrawler():
     rc.run()
     print(rc.rows)
 
+def test_profitCrawler(year='2016', season='02'):
+    rc = profitCrawler(year, season)
+    rc.run()
+    print(rc.rows)
+
 def main():
-    test_stockQuotesCrawler()
-    test_revenueCrawler()
+    test_institutionalDailyTradingCrawler()
+    #test_profitCrawler()
+    #test_stockQuotesCrawler()
+    #test_revenueCrawler()
 
 if __name__ == '__main__':
     main()

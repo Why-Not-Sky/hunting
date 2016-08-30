@@ -17,7 +17,7 @@ def to_number(x='', default_vaule='0'):
 
     col = re.sub(",", "", x.strip())
     col = ''.join(list(filter(lambda x: x in string.printable, col)))
-    return default_vaule if (col in _CONVERT_ZERO) or (not math_util.is_number(col)) else col
+    return default_vaule if (col in _CONVERT_ZERO) or (not math_util.is_number(col)) else col.strip()
 
 def test_to_number():
     rlist = ['3', '2.3', '-1.2', '30%', '不適合', 'A', '']

@@ -56,6 +56,26 @@ def test_month_range():
     print (month_range(start_month, end_month))
     print(month_range(start_month, end_month, 'm'))
 
+def quarter_range(start_q='200701', end_q='201602', type='s'):
+    start_year, end_year = int(start_q[:4]), int(end_q[:4]) + 1
+    sq, eq = int(start_q), int(end_q)
+    '''
+    dlist=[]
+    for x in list(range(start_year, end_year)):
+        for y in ['01', '02', '03', '04']:
+            q = int(str(x) + y)
+            if (q >= sq and q <= eq):
+                dlist.append(str(q))
+    '''
+
+    dlist = [str(x)+y for x in list(range(start_year, end_year)) for y in ['01', '02', '03', '04'] if (int(str(x)+y) >= sq and int(str(x)+y) <= eq)]
+
+    return dlist
+
+def test_quarter_range():
+    start_q, end_q = '201501', '201602'
+    print (quarter_range(start_q, end_q))
+
 def date_str_add(date_str, delta=1):
     d = str_to_date(date_str)
     nd = d + timedelta(delta)
@@ -97,7 +117,8 @@ def test_date_rang():
         print('Crawling {} '.format(date_str))
 
 def main():
-    test_month_range()
+    test_quarter_range()
+    #test_month_range()
     #test_date_rang()
 
 if __name__ == '__main__':

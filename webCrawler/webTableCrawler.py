@@ -38,7 +38,7 @@ _OUTPUT_CSV_FILE = 'output.csv'
 _OUTPUT_HTML_FILE = 'output.html'
 
 class WebCrawler():
-    def __init__(self, url, rawfile=None, encode='utf-8', reload=True, raw_path=PATH_RAW, data_path=PATH_TRANSFORM):
+    def __init__(self, url, payload=None, rawfile=None, encode='utf-8', reload=True, raw_path=PATH_RAW, data_path=PATH_TRANSFORM):
         ''' Make directory if not exist when initialize '''
         if not isdir(raw_path): mkdir(raw_path)
         self.raw_path = raw_path
@@ -47,6 +47,7 @@ class WebCrawler():
         self.data_path = data_path
 
         self.url = url
+        self.payload = payload
         self.rawfile = rawfile if rawfile is not None else _OUTPUT_HTML_FILE
         self.reload = reload
         self.encode = encode          #default is utf-8, and adapted according the file stream
@@ -59,7 +60,7 @@ class WebCrawler():
 
         if (self.reload) or (not os.path.exists(sfile)):
             url = url if (url is not None) else self.url
-            html_encode = web_util.save_html(url, sfile)
+            html_encode = web_util.save_html(url, sfile, payload=self.payload)
             if self.encode is None: self.encode = html_encode
 
     def get_raw_data(self):
@@ -69,11 +70,11 @@ class WebCrawler():
         return(data)
 
 class webTableCrawler(WebCrawler):
-    def  __init__(self, url=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None):
+    def  __init__(self, url=None, payload=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None):
         outfile= outfile if (outfile is not None) else _OUTPUT_CSV_FILE
         rawfile = outfile.lower().replace('.csv', '.html')
 
-        super(webTableCrawler, self).__init__(url=url, rawfile=rawfile, encode=encode, reload=reload)
+        super(webTableCrawler, self).__init__(url=url, payload=payload, rawfile=rawfile, encode=encode, reload=reload)
 
         self.datafile = '' if self.data_path is None else self.data_path + outfile
         self.doc = self.get_doc()
@@ -144,8 +145,8 @@ class webTableCrawler(WebCrawler):
         #logging.debug('\n{}'.format(self.rows))
 
 class webHtmlTableCrawler(webTableCrawler):
-    def __init__(self, url, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
-        super(webHtmlTableCrawler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean, fn_transform=fn_transform)
+    def __init__(self, url, payload=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
+        super(webHtmlTableCrawler, self).__init__(url=url, payload=payload, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean, fn_transform=fn_transform)
 
         self.xpath_header = xheader # if (xheader is not None) else XPATH_HEADER
         self.xpath_body = xbody # if (xbody is not None) else XPATH_BODY
@@ -173,7 +174,7 @@ class webHtmlTableCrawler(webTableCrawler):
         xbody = xbody if (xbody is not None) else self.xpath_body
         if xbody is None: return None
 
-        return (self.doc.xpath(xbody))  # //*[@id="example"]/tbody/tr[1]/td[2]  --
+        return (self.doc.xpath(xbody))
 
     def get_row(self, el):
         # lambda x: web_util.get_text(x)
@@ -181,8 +182,8 @@ class webHtmlTableCrawler(webTableCrawler):
         # return (el.xpath('td'))    # x = web_util.get_text(td)
 
 class webJsonTableCarwler(webTableCrawler):
-    def __init__(self, url, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
-        super(webJsonTableCarwler, self).__init__(url=url, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean,
+    def __init__(self, url, payload=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None, xheader=None, xbody=None):
+        super(webJsonTableCarwler, self).__init__(url=url, payload=payload, outfile=outfile, encode=encode, reload=reload, fn_clean=fn_clean, cols_to_clean=cols_to_clean,
                                                   fn_transform=fn_transform)
 
         self.xheader = xheader

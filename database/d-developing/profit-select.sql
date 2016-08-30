@@ -1,0 +1,1 @@
+select years, season, count(*) from profit group by years, season order by 1, 2 ;

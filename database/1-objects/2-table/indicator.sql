@@ -34,3 +34,19 @@ CREATE TABLE indicator
 
 CREATE INDEX pm_key
    ON indicator (idc_id, symbol_id, idc_date);
+   
+CREATE TABLE kd
+(
+   idc_id      int,
+   symbol_id   varchar (10),
+   idc_date    date,
+   rsv   float,
+   k float,
+   d float
+);   
+   
+CREATE INDEX idx_date
+   ON kd (idc_date, idc_id,  symbol_id);
+CREATE INDEX idx_symbol
+   ON kd (idc_id,  symbol_id, idc_date);
+      

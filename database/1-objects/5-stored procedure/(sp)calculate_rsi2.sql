@@ -32,8 +32,8 @@ BEGIN
     			  , avg(case when change >0 then change else 0 end) as gain
     			  , avg (case when change < 0 then -1 * change else 0 end) as loss
     		 from periods m
-    			  join quotes s on (s.trade_date between '20160802' and '20160819')--m.from_date and m.to_date)   --performance for only the calculate range,
-    		where s.trade_date between '20160720' and '20160819'--start_date and end_date
+    			  join quotes s on (s.trade_date between m.from_date and m.to_date)   --performance for only the calculate range,
+    		where s.trade_date between start_date and end_date
     		group by symbol_id, m.to_date),
     	
     	 rsi_n as (
