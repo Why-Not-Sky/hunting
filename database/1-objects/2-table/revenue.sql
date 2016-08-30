@@ -29,5 +29,8 @@ CREATE TABLE profit
    period             char (1)                            --'M', 'Q', 'H', 'Y'
 );
 
-create index profit_idx_date on profit (years, season, symbol_id);
-create index profit_idx_symbol on profit (symbol_id, years, season);
+CREATE INDEX profit_idx_date
+   ON profit (years, season, symbol_id);
+
+CREATE INDEX profit_idx_symbol
+   ON profit (symbol_id, years, season);

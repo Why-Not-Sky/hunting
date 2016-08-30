@@ -331,8 +331,8 @@ class institutionalDailyTradingCrawler(etl):
         self._outfile = trade_date + '.csv'
 
         self._header = ['代號',	'名稱',	'外資買',	'外資賣',	'外資淨買','投信買','投信賣','投信淨買','自營商淨買','自營商(自行買賣)買',	'自營商(自行買賣)賣','自營商(自行買賣)淨買','自營商(避險)買','自營商(避險)賣',	'自營商(避險)淨買','三大法人買賣超']
-        self._english = ['code', 'trade_date', 'foregin_purchase','foregin_sale','foregin_net_purchase','sic_purchase', 'sic_sale', 'sic_net_purchase'
-            ,'dealers_net_purchase','dealers_prop_purchase','dealers_prop_sale','dealers_prop_net_purchase', 'dealers_hedge_purchase', 'Dealers_hedge_sale', 'dealers_hedge_net_purchase',	'total_net_purchase']
+        self._english = ['symbol_id', 'trade_date', 'foregin_purchase','foregin_sale','foregin_net_purchase','sic_purchase', 'sic_sale', 'sic_net_purchase'
+            ,'dealers_net_purchase','dealers_prop_purchase','dealers_prop_sale','dealers_prop_net_purchase', 'dealers_hedge_purchase', 'dealers_hedge_sale', 'dealers_hedge_net_purchase',	'total_net_purchase']
         self.cols_to_clean =  list(range(2, len(self._english)))
 
         self._source = [
@@ -374,12 +374,10 @@ class institutionalDailyTradingCrawler(etl):
         return (self.rows)
 
     def _clean_db(self):
-        return
-        sql = "delete from institution_trading where trade_date={};".format(self._trade_dateh)
+        sql = "delete from institution_trading where trade_date = '{}';".format(date_util.str_to_date(self._trade_date))
         db_util.execute_sql(connection=self._get_connection(), sql=sql)
 
     def load(self):
-        return
         connection = self._get_connection()
         self._clean_db()
 
@@ -415,9 +413,9 @@ def test_profitCrawler(year='2016', season='02'):
 
 def main():
     test_institutionalDailyTradingCrawler()
-    #test_profitCrawler()
-    #test_stockQuotesCrawler()
-    #test_revenueCrawler()
+    test_profitCrawler()
+    test_stockQuotesCrawler()
+    test_revenueCrawler()
 
 if __name__ == '__main__':
     main()

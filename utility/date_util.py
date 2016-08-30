@@ -28,7 +28,7 @@ def to_century_date(taiwan_date='105/07/12', esc_char='/'):
     century_date = '{0}{esc_ch}{1:02d}{esc_ch}{2:02d}'.format(year, month, day, esc_ch=esc_char)
     return century_date
 
-def date_range(start_date, end_date):
+def date_range(start_date, end_date, type='d'):
     """ date_range(20160701, 20160712) """
     # 若是字串則自動轉換為日期
     start_date = str_to_date(start_date) if isinstance(start_date, str) else start_date
@@ -36,6 +36,7 @@ def date_range(start_date, end_date):
     nday = 1 + (end_date - start_date).days
 
     dlist = list(start_date + timedelta(n) for n in range(nday))
+    if (type == 's'): dlist = [d.strftime('%Y%m%d') for d in dlist]
     return dlist
 
 def month_range(start_month, end_month, type='s'):

@@ -16,11 +16,20 @@ feature list:
     * 
 
 ---------------------------------------------------------------------------------------------------------------------------------------'''
-import stockHelper as crawler
 import datetime
+import argparse
+import configparser
+import logging
+import os
+from datetime import date, timedelta
+
+from utility import date_util as util
+from webCrawler import stockHelper as crawler
+
+_CONFIG_FILE = 'crawler.cfg'
 
 def get_wespai(url=None, outfile=None):
-    print(crawler.get_wespai(url, outfile))
+    print(crawler.crawl_wespai(url, outfile))
 
 '''---------------
 價值面：
@@ -28,17 +37,44 @@ def get_wespai(url=None, outfile=None):
         月營收資料
 '''
 
-def get_revenue_monthly(month='201607'):
-    'http://mops.twse.com.tw/nas/t21/sii/t21sc03_104_4_0.html'
-    pass
+
+class batchRunner():
+    def __init__(self, prefix="data", origin="origin", section_name=None, config_name=None):
+        # Set logging
+        if not os.path.isdir('log'):
+            os.makedirs('log')
+        logging.basicConfig(filename='log/crawl-error.log',
+                            level=logging.ERROR,
+                            format='%(asctime)s\t[%(levelname)s]\t%(message)s',
+                            datefmt='%Y/%m/%d %H:%M:%S')
+        self._section_name = section_name
+        self._config_name = config_name
+
+    def run(self, dlist=[], method=None, args={}):
+        max_error = 1000
+        error_times = 0
+
+        for d in dlist:
+            try:
+                method(d, **args)
+                #self._write_execution_log(date_str)
+                print('Crawling {} done! '.format(d))
+                error_times = 0
+            except:
+                logging.error('Run raise error {}'.format(d))
+                error_times += 1
+                if (error_times < max_error):
+                    continue
+                else:
+                    break
 
 def get_roe():
     today = datetime.date.today().strftime('%Y%m%d')
     url, outfile = 'http://stock.wespai.com/p/20494', '{}-ROE.CSV'.format(today)
-    print (crawler.get_wespai(url=url, outfile=outfile))
+    print (crawler.crawl_wespai(url=url, outfile=outfile))
 
 def get_exwright(year=105):
-    print (crawler.get_exwright(year=year))
+    print (crawler.crawl_exwright(year=year))
 
 url_wespai = 'http://stock.wespai.com/'
 
@@ -60,8 +96,15 @@ def start_crawler():
         args = jb['args']
         method(**args)
 
+def test_batchRunner():
+    jb = batchRunner()
+    #jb.run(list(range(103, 105)), get_exwright)
+
+    jb.run(util.date_range('20160804', '20160829', 's'), crawler.crawl_institutionalDailyTrading)
+
 def main():
-    start_crawler()
+    test_batchRunner()
+    #start_crawler()
 
 if __name__ == '__main__':
     main()

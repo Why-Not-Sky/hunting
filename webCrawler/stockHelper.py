@@ -78,6 +78,7 @@ def crawl_historical_quotes(start_date='20160701', end_date='20160703'):
         rc.run(date_str)
         print(rc.rows)
 
+
 def crawl_quarterly_profit(start_q='200701', end_q='201602'):
     dlist = date_util.quarter_range(start_q, end_q)
 
@@ -87,18 +88,35 @@ def crawl_quarterly_profit(start_q='200701', end_q='201602'):
         rc.run()
         print(rc.rows)
 
+def crawl_institutionalDailyTrading(trade_date=None):
+    trade_date = datetime.today().strftime('%Y%m%d') if trade_date is None else trade_date
+    rc = stockCrawler.institutionalDailyTradingCrawler(trade_date)
+    rc.run()
+    return (rc.rows)
+
+def crawl_institutionalTrading(start_date='20160701', end_date='20160703'):
+    dd = date_util.date_range(start_date, end_date)
+    for d in dd:
+        date_str = d.strftime('%Y%m%d')
+        print('Crawling {} '.format(date_str))
+        rows = crawl_institutionalDailyTrading(date_str)
+        print(rows)
+
+
 def test_get_revenue():
     start_month, end_month = '201101', '201112'
     # start_month, end_month = '201310', '201601'
     # print(crawl_revenue_monthly(start_month))
     crawl_monthly_revenue(start_month, end_month)
 
+
 def main():
+    crawl_institutionalTrading('20160804', '20160829')
     #crawl_quarterly_profit('201601', '201602')
     #crawl_monthly_revenue('201101', '201606')
-    crawl_monthly_revenue('201607', '201607')
+    #crawl_monthly_revenue('201607', '201607')
     #crawl_historical_quotes('20160822', '20160822')
-    print(crawl_exwright())
+    #print(crawl_exwright())
 
 if __name__ == '__main__':
     main()

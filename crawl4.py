@@ -57,6 +57,7 @@ class Crawler():
                             format='%(asctime)s\t[%(levelname)s]\t%(message)s',
                             datefmt='%Y/%m/%d %H:%M:%S')
 
+
     def run(self, start_date=None, end_date=None):
         if start_date is None:
             start_date, end_date = self.get_duration()
