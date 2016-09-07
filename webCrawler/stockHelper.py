@@ -102,6 +102,12 @@ def crawl_institutionalTrading(start_date='20160701', end_date='20160703'):
         rows = crawl_institutionalDailyTrading(date_str)
         print(rows)
 
+def crawl_stockHoldingStructure(trade_date=None):
+    trade_date = datetime.today().strftime('%Y%m%d') if trade_date is None else trade_date
+    rc = stockCrawler.institutionalDailyTradingCrawler(trade_date)
+    rc.run()
+    return (rc.rows)
+
 
 def test_get_revenue():
     start_month, end_month = '201101', '201112'

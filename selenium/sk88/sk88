@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://w.sk88.com.tw/Cross/Pc/Login.aspx" />
+<title>sk88</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">sk88</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/Cross/Pc/Login.aspx</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=TxtIDNo</td>
+	<td>F120682415</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=TxtPass</td>
+	<td>mic7693</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Button1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>https://w.sk88.com.tw/Cross/Pc/MenuTopList.aspx?MenuListid=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>https://w.sk88.com.tw/Cross/Pc/QueryFinalizingAmount.aspx</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=TxtDate</td>
+	<td>javascript{var today = new Date();&nbsp;&nbsp;&nbsp;&nbsp;var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);&nbsp;&nbsp;&nbsp;&nbsp;lastWeek.toJSON().slice(0, 10).replace(/-/g, &quot;/&quot;)}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=BtnQuery</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

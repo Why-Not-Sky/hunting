@@ -66,12 +66,16 @@ def get_data(html_file, encode='utf-8'):
     return data
 
 
-def get_from_url(url):
+def get_from_url(url, payload=None):
+    r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
+    r.encoding = r.apparent_encoding
+
     # f = urllib.request.urlopen(url)
     # data = f.read()
-    response = requests.get(url)
-    data = response.text
-    tree = html.fromstring(data)
+    return (r.text)
+
+def get_etree_from_url(url, payload=None):
+    tree = html.fromstring(get_from_url(url, payload=payload))
     return tree
 
 
@@ -119,11 +123,12 @@ def get_all_texts(el, class_name):
 def retrieve_html_table(url=None, payload=None, xtable=None):
     r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
 
-    print (r.encoding)
+    #print (r.encoding)
     #r.encoding = 'utf-8'
     r.encoding = r.apparent_encoding
 
-    tree = clean.clean_html(html.fromstring(r.text))
+    #tree = clean.clean_html(html.fromstring(r.text))
+    tree = html.fromstring(r.text)
 
     etable = tree.xpath(xtable)
     rows = []
@@ -133,6 +138,34 @@ def retrieve_html_table(url=None, payload=None, xtable=None):
 
     return(rows)
 
+'''
+
+#
+'''
+def test_crawl_stockHoldingStructure():
+    trade_date = '20160729'
+    payload = {
+        '__EVENTTARGET': 'LinkButton1',
+        '__EVENTARGUMENT': None,
+        '__VIEWSTATE': '/wEPDwULLTE5OTMyNjc5OTdkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYFBQhidG5RdWVyeQUFb2NoYjEFBW9jaGIyBQVvY2hiMwUFb2NoYjS9Q3FCbhaOJOP/yma5goUcYrqchw==',
+        '__VIEWSTATEGENERATOR': '42C20E80',
+        'hiddenServerEvent': 'tab4',
+        'txtStock': None,
+        'ddl2': trade_date,
+        'ochb1': 'on',
+        'ochb1StateCont': 2,
+        'ddl1': 0.001,
+        'ochb2StateCont': 1,
+        'ochb3': 'on',
+        'ochb3StateCont': 2,
+        'ochb4': 'on',
+        'ochb4StateCont': 2
+    }
+
+    url = 'http://norway.twsthr.info/StockHoldersTopWeek.aspx?Show=4'
+    xtable = '//*[@id="adv_details"]/tbody/tr'
+    rows = retrieve_html_table(url=url, payload=payload, xtable=xtable)
+    print ('number of rows:{}'.format(len(rows)), rows)
 
 def test_retrieve_html_table():
     trade_date = '105/08/23'
@@ -159,8 +192,9 @@ def test_retrieve_html_table():
 
 
 def main():
+    test_crawl_stockHoldingStructure()
+    return
     test_retrieve_html_table()
-    pass
     #test_post_data()
     #test_get_header()
     # test_save_html()

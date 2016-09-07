@@ -1,3 +1,4 @@
+mechanize
 pymagic
 requests==2.7.0
 lxml==3.5.0
