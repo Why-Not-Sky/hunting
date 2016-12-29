@@ -1,7 +1,12 @@
 select min(trade_date), max(trade_date) from quotes 
-where trade_date between '20000101' and '20001231';
+where trade_date between '20160101' and '20161231';
 
-select min(trade_date), max(trade_date) from quotes;
+--list number of records by year.
+select extract(year from trade_date) as years, count(*)
+from quotes
+group by extract(year from trade_date)
+order by 1;
+
 
 select min(trade_date), max(trade_date) from quotes;
 

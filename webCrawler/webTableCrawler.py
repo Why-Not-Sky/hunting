@@ -48,10 +48,10 @@ class WebCrawler():
 
         self.url = url
         self.payload = payload
-        self.rawfile = rawfile if rawfile is not None else _OUTPUT_HTML_FILE
+        self.rawfile = rawfile # if rawfile is not None else _OUTPUT_HTML_FILE
         self.reload = reload
         self.encode = encode          #default is utf-8, and adapted according the file stream
-        self.rawdata = self.get_raw_data()
+        self.rawdata = self.get_raw_data() if rawfile is not None else web_util.get_from_url(url, payload)
         #self.postfix = ''
         #self._connection = None
 
@@ -71,12 +71,12 @@ class WebCrawler():
 
 class webTableCrawler(WebCrawler):
     def  __init__(self, url=None, payload=None, outfile=None, encode='utf-8', reload=True, fn_clean=None, cols_to_clean=None, fn_transform=None):
-        outfile= outfile if (outfile is not None) else _OUTPUT_CSV_FILE
-        rawfile = outfile.lower().replace('.csv', '.html')
+        outfile= outfile #if (outfile is not None) else _OUTPUT_CSV_FILE
+        rawfile = outfile.lower().replace('.csv', '.html') if outfile is not None else None
 
         super(webTableCrawler, self).__init__(url=url, payload=payload, rawfile=rawfile, encode=encode, reload=reload)
 
-        self.datafile = '' if self.data_path is None else self.data_path + outfile
+        self.datafile = None if (self.data_path is None) or (outfile is None) else (self.data_path + outfile)
         self.doc = self.get_doc()
         self.rows = None
         self.header = None

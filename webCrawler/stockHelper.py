@@ -58,7 +58,7 @@ def crawl_exwright(year=105):
     outfile = 'rate_{}.csv'.format(year)
     return (crawl_wespai(url=url, outfile=outfile))
 
-
+# 營收資訊
 def crawl_monthly_revenue(from_month, to_month):
     dm = date_util.month_range(from_month, to_month)
     for m in dm:
@@ -67,7 +67,32 @@ def crawl_monthly_revenue(from_month, to_month):
         rc.run()
         print(rc.rows)
 
+# 大盤指數
+def crawl_trading_statistics(trade_month='201608'):
+    year, month = trade_month[:4], trade_month[4:]
+    payload = {
+        'download': None,
+        'query_year': year,
+        'query_month': month
+    }
 
+    url = 'http://www.twse.com.tw/ch/trading/exchange/FMTQIK/FMTQIK.php'
+    header = ['date', 'volume', 'amount', 'trans', 'close', 'change']
+    xtable = '//*[@id="main-content"]/table/tbody/tr'
+
+    rows = web_util.retrieve_html_table(url=url, payload=payload, xtable=xtable, header=header)
+    #print ('number of rows:{}'.format(len(rows)))
+    return(rows)
+
+def crawl_trading_statistics_monthly(from_month, to_month):
+    dm = date_util.month_range(from_month, to_month)
+    for month_str in dm:
+        rows = crawl_trading_statistics(month_str)
+        print('Crawl complete!: {} # of rows: {} '.format(month_str, len(rows)))
+        #r = petl.look(rows)
+        print(rows)
+
+# 歷史報價
 def crawl_historical_quotes(start_date='20160701', end_date='20160703'):
     dd = date_util.date_range(start_date, end_date)
     rc = stockCrawler.stockQuotesCrawler()
@@ -117,6 +142,8 @@ def test_get_revenue():
 
 
 def main():
+    crawl_trading_statistics_monthly('201601', '201609')
+    return
     crawl_institutionalTrading('20160804', '20160829')
     #crawl_quarterly_profit('201601', '201602')
     #crawl_monthly_revenue('201101', '201606')

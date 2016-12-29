@@ -19,18 +19,18 @@ from os import path, mkdir
 from lxml import html
 import lxml.html.clean as clean
 import chardet
-
+import petl
 
 def save_html(url, fname, payload=None):
     r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
     prefix = path.dirname(fname)  # path.abspath(fname))
     if (prefix != '') and (not path.isdir(prefix)): mkdir(prefix)
 
-    #dic = chardet.detect(r.content[:10])
-    #fcode = dic['encoding']
+    dic = chardet.detect(r.content[:1024])  #performance issue
+    fcode = dic['encoding']
     # 2016/08/24: http://sh3ll.me/2014/06/18/python-requests-encoding/
-    #r.encoding = 'utf8'
-    r.encoding = r.apparent_encoding
+    r.encoding = fcode
+    #r.encoding = r.apparent_encoding   #apparent_encoding get poor performance
 
     with open(fname, "wb") as code:
         code.write(r.content)
@@ -68,7 +68,9 @@ def get_data(html_file, encode='utf-8'):
 
 def get_from_url(url, payload=None):
     r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
-    r.encoding = r.apparent_encoding
+    dic = chardet.detect(r.content[:10])  # performance issue
+    fcode = dic['encoding']
+    r.encoding = fcode #r.apparent_encoding
 
     # f = urllib.request.urlopen(url)
     # data = f.read()
@@ -120,11 +122,12 @@ def parse_text(td):  # td element
 def get_all_texts(el, class_name):
     return [e.text_content() for e in el.find_class(class_name)]
 
-def retrieve_html_table(url=None, payload=None, xtable=None):
+def retrieve_html_table(url=None, payload=None, xtable=None, header=None):
     r = requests.get(url) if (payload is None) else requests.post(url, data=payload)
 
     #print (r.encoding)
     #r.encoding = 'utf-8'
+    fcode = chardet.detect(r.content[:1024])['encoding']  # performance issue
     r.encoding = r.apparent_encoding
 
     #tree = clean.clean_html(html.fromstring(r.text))
@@ -136,36 +139,69 @@ def retrieve_html_table(url=None, payload=None, xtable=None):
         row = list(map(lambda x: get_text(x), tb.xpath('td')))
         rows.append(row)
 
+    if (header is not None):
+        rows = petl.headers.pushheader(rows, header)
+
     return(rows)
 
 '''
-
+__EVENTTARGET:LinkButton1
+__EVENTARGUMENT:
+__VIEWSTATE:/wEPDwULLTE5OTMyNjc5OTdkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYFBQhidG5RdWVyeQUFb2NoYjEFBW9jaGIyBQVvY2hiMwUFb2NoYjS9Q3FCbhaOJOP/yma5goUcYrqchw==
+__VIEWSTATEGENERATOR:42C20E80
+hiddenServerEvent:tab4
+txtStock:輸入台股代號/名稱
+ddl2:20160902
+ochb1:on
+ochb1StateCont:2
+ddl1:0.001
+ochb2StateCont:1
+ochb3StateCont:1
+ochb4StateCont:1
 #
 '''
 def test_crawl_stockHoldingStructure():
-    trade_date = '20160729'
+    trade_date = '20160826'
     payload = {
         '__EVENTTARGET': 'LinkButton1',
         '__EVENTARGUMENT': None,
         '__VIEWSTATE': '/wEPDwULLTE5OTMyNjc5OTdkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYFBQhidG5RdWVyeQUFb2NoYjEFBW9jaGIyBQVvY2hiMwUFb2NoYjS9Q3FCbhaOJOP/yma5goUcYrqchw==',
         '__VIEWSTATEGENERATOR': '42C20E80',
         'hiddenServerEvent': 'tab4',
-        'txtStock': None,
+        'txtStock': '輸入台股代號/名稱',
         'ddl2': trade_date,
-        'ochb1': 'on',
-        'ochb1StateCont': 2,
+        # 'ochb1': 'on',          #沒選
+        'ochb1StateCont': 1,
         'ddl1': 0.001,
         'ochb2StateCont': 1,
-        'ochb3': 'on',
-        'ochb3StateCont': 2,
-        'ochb4': 'on',
-        'ochb4StateCont': 2
+        #'ochb3': 'on',
+        'ochb3StateCont': 1,
+        #'ochb4': 'on',
+        'ochb4StateCont': 1
     }
 
     url = 'http://norway.twsthr.info/StockHoldersTopWeek.aspx?Show=4'
     xtable = '//*[@id="adv_details"]/tbody/tr'
     rows = retrieve_html_table(url=url, payload=payload, xtable=xtable)
-    print ('number of rows:{}'.format(len(rows)), rows)
+    print ('number of rows:{}'.format(len(rows)))
+    rows=petl.look(rows)
+    print(rows)
+
+def test_crawl_tse_market_quotes():
+    trade_month = '201608'
+    year, month = trade_month[:4], trade_month[4:]
+    payload = {
+        'download': None,
+        'query_year': year,
+        'query_month': month
+    }
+
+    url = 'http://www.twse.com.tw/ch/trading/exchange/FMTQIK/FMTQIK.php'
+    xtable = '//*[@id="main-content"]/table/tbody/tr'
+    rows = retrieve_html_table(url=url, payload=payload, xtable=xtable)
+    print ('number of rows:{}'.format(len(rows)))
+    rows=petl.look(rows)
+    print(rows)
 
 def test_retrieve_html_table():
     trade_date = '105/08/23'
@@ -190,10 +226,16 @@ def test_retrieve_html_table():
     rows = retrieve_html_table(url=url_otc, xtable=xbody)
     print ('number of rows:{}'.format(len(rows)), rows)
 
+def get_report_date():
+    html_str = '<option value="20160826">20160826</option><option value="20160819">20160819</option><option value="20160812">20160812</option><option value="20160805">20160805</option><option value="20160729">20160729</option><option value="20160722">20160722</option><option value="20160715">20160715</option><option value="20160707">20160707</option><option value="20160701">20160701</option><option value="20160624">20160624</option><option value="20160617">20160617</option><option value="20160608">20160608</option><option value="20160604">20160604</option><option value="20160527">20160527</option><option value="20160520">20160520</option><option value="20160513">20160513</option><option value="20160506">20160506</option><option value="20160429">20160429</option><option value="20160422">20160422</option><option value="20160415">20160415</option><option value="20160408">20160408</option><option value="20160401">20160401</option><option value="20160325">20160325</option><option value="20160318">20160318</option><option value="20160311">20160311</option><option value="20160304">20160304</option><option value="20160226">20160226</option><option value="20160219">20160219</option><option value="20160205">20160205</option><option value="20160130">20160130</option><option value="20160122">20160122</option><option value="20160115">20160115</option><option value="20160108">20160108</option><option value="20151231">20151231</option><option value="20151225">20151225</option><option value="20151218">20151218</option><option value="20151211">20151211</option><option value="20151204">20151204</option><option value="20151127">20151127</option><option value="20151120">20151120</option><option value="20151113">20151113</option><option value="20151106">20151106</option><option value="20151030">20151030</option><option value="20151023">20151023</option><option value="20151016">20151016</option><option value="20151008">20151008</option><option value="20151002">20151002</option><option value="20150925">20150925</option><option value="20150918">20150918</option><option value="20150911">20150911</option><option value="20150904">20150904</option><option value="20150828">20150828</option><option value="20150821">20150821</option><option value="20150814">20150814</option><option value="20150807">20150807</option><option value="20150731">20150731</option><option value="20150724">20150724</option><option value="20150717">20150717</option><option value="20150709">20150709</option><option value="20150703">20150703</option><option value="20150626">20150626</option><option value="20150618">20150618</option><option value="20150612">20150612</option><option value="20150605">20150605</option><option value="20150529">20150529</option><option value="20150522">20150522</option><option value="20150515">20150515</option><option value="20150508">20150508</option><option value="20150430">20150430</option>'
+    tree = html.fromstring(html_str)
+    print (tree.xpath('//option/text()'))
 
 def main():
-    test_crawl_stockHoldingStructure()
+    test_crawl_tse_market_quotes()
     return
+    get_report_date()
+    test_crawl_stockHoldingStructure()
     test_retrieve_html_table()
     #test_post_data()
     #test_get_header()

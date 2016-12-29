@@ -6,8 +6,20 @@ version  date    author     memo
 ---------------------------------------------------------------------------------------------------------------------------------------'''
 import re
 import string
+from functools import reduce
 
 from utility import math_util
+
+
+def get_symbol_id(iname='1101台泥'):
+    #sid = str(list(filter(lambda  x: math_util.is_number(x), iname)))
+    sid = reduce(lambda x, y: x+y, filter(lambda x: math_util.is_number(x), iname))
+
+    return (sid)
+
+def test_get_symbol_id():
+    iname='1101台泥'
+    print (get_symbol_id(iname))
 
 def to_number(x='', default_vaule='0'):
     _CONVERT_ZERO = ['', '--', '---', '---', 'x', 'X', 'null', 'NULL']  # convert illegal value into 0
@@ -36,7 +48,7 @@ def test_to_number():
     print (mlist)
 
 def main():
-    pass
+    test_get_symbol_id()
 
 if __name__ == '__main__':
     main()

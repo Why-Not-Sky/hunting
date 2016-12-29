@@ -383,13 +383,92 @@ class institutionalDailyTradingCrawler(etl):
 
         petl.todb(self.rows, connection, 'institution_trading', drop=False)  # , truncate=False)
 
+class stockHoldingStructureCrawler(etl):
+    def __init__(self, trade_date=None):
+        super(stockHoldingStructureCrawler, self).__init__()
+
+        self._trade_date = trade_date
+        self._taiwan_date =  self._taiwan_date = date_util.to_taiwan_date(trade_date)
+        self.rows = None
+        self._outfile = None #trade_date + '.csv'
+
+        '''
+        股票代號/名稱	類別	總集保戶數-上週/本週	 	大股東人數-上週/本週 	持有率-上週/本週	差異%	平均張數/人-上週/本週 差異%	今日盤價 今日漲跌
+        |    |    | 1   | 1101台泥     | 水泥   | 126188  | 125419  |    | 533   | 533   |    | 82.67   | 82.83   | 0.16    | 29.26   | 29.44   | 0.18    | 36.50   | -1.00   |    |
+        '''
+        self._title = ['代號',	'名稱',	'類別',	'總集保戶數-上週', '總集保戶數-本週', '大股東人數-上週', '大股東人數-本週', '持有率-上週', '持有率-本週', '差異%', '平均張數/人-上週', '平均張數/人-本週', '差異%', '今日盤價', '今日漲跌']
+        self._header = ['symbol_id', 'trade_date', 'account_last_week','account_thisweek','big_holder_last_week','big_holder_this_week', 'ratio_last_week', 'ratio_this_week', 'ratio_variance', 'avg_las_week', 'avg_this_week', 'avg_variance']
+        self.cols_to_clean =  None
+
+        self._source = [
+            dict(url='http://norway.twsthr.info/StockHoldersTopWeek.aspx?Show=4',
+                 payload={
+                     '__EVENTTARGET': 'LinkButton1',
+                     '__EVENTARGUMENT': None,
+                     '__VIEWSTATE': '/wEPDwULLTE5OTMyNjc5OTdkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYFBQhidG5RdWVyeQUFb2NoYjEFBW9jaGIyBQVvY2hiMwUFb2NoYjS9Q3FCbhaOJOP/yma5goUcYrqchw==',
+                     '__VIEWSTATEGENERATOR': '42C20E80',
+                     'hiddenServerEvent': 'tab4',
+                     'txtStock': '輸入台股代號/名稱',
+                     'ddl2': trade_date,
+                     'ochb1StateCont': 1,
+                     'ddl1': 0.001,
+                     'ochb2StateCont': 1,
+                     'ochb3StateCont': 1,
+                     'ochb4StateCont': 1
+                 },
+                 outfile=self._outfile, reload=True,
+                 fn_clean=None, cols_to_clean=None, fn_transform=self._transform,
+                 xbody='//*[@id="adv_details"]/tbody/tr')
+        ]
+
+    def _transform(self, row=None):  # , date_str=None):
+        row.pop(10)
+        row.pop(7)
+        r = row[3:len(row)-3]
+        r[0] = stock_util.get_symbol_id(row[3])
+        r[1] = self._trade_date
+
+        return (r)
+
+    def transform(self):
+        table = None
+        for src in self._source:
+            sc = webTableCrawler.webHtmlTableCrawler(**src)
+            r = sc.get_table()
+            if (r is not None) and (len(r) > 0):
+                table = petl.stack(table, r) if table is not None else r
+                #print ('number of rows:{}'.format(len(table)))
+
+        self.rows = petl.headers.pushheader(table, self._header)
+        if (self._outfile is not None):
+            petl.tocsv(self.rows, source=sc.data_path + self._outfile)
+
+        return (self.rows)
+
+    def _clean_db(self):
+        sql = "delete from xxx where trade_date = '{}';".format(date_util.str_to_date(self._trade_date))
+        db_util.execute_sql(connection=self._get_connection(), sql=sql)
+
+    def load(self):
+        return
+        connection = self._get_connection()
+        self._clean_db()
+
+        petl.todb(self.rows, connection, 'institution_trading', drop=False)  # , truncate=False)
+
+def test_stockHoldingStructureCrawler():
+    trade_date = '20160902'
+    print('Crawling {}...'.format(trade_date))
+    sq = stockHoldingStructureCrawler(trade_date)
+    sq.run()
+    print('number of rows:{}'.format(len(sq.rows)))
+    print (sq.rows)
 
 def test_stockQuotesCrawler():
     trade_date = '20160810'
     print('Crawling {}...'.format(trade_date))
     sq = stockQuotesCrawler(trade_date)
     sq.run()
-
 
 def test_institutionalDailyTradingCrawler():
     trade_date = '20160823'
@@ -398,7 +477,6 @@ def test_institutionalDailyTradingCrawler():
     sq.run()
     print('number of rows:{}'.format(len(sq.rows)))
     print (sq.rows)
-
 
 def test_revenueCrawler():
     start_month = '201112'
@@ -412,6 +490,8 @@ def test_profitCrawler(year='2016', season='02'):
     print(rc.rows)
 
 def main():
+    test_stockHoldingStructureCrawler()
+    return
     test_institutionalDailyTradingCrawler()
     test_profitCrawler()
     test_stockQuotesCrawler()
